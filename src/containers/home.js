@@ -22,15 +22,13 @@ export default function Home(props) {
         {props.data.offers.map((offer, index) => {
           return (
             <div className="offer" key={index}>
-              <img
-                className="offer-img"
-                src={offer.product_image.secure_url}
-                alt={offer._id}
-                onClick={() => {
-                  console.log(offer._id);
-                }}
-              />
-              <Link to={`/offer/${offer._id}`}></Link>
+              <Link to={`/offer/${offer._id}`}>
+                <img
+                  className="offer-img"
+                  src={offer.product_image.secure_url}
+                  alt={offer._id}
+                />
+              </Link>
               {/* {console.log(offer)} */}
             </div>
           );
