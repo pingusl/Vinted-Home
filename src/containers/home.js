@@ -1,7 +1,7 @@
 import bannerImg from "../img/banner-hero.jpeg";
 //import { useEffect, useState } from "react";
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className="home-container">
       <div className="banner">
@@ -13,6 +13,7 @@ export default function Home() {
 
         <img className="banner" src={bannerImg} alt="hero" />
       </div>
+      {console.log(props.data)}
       <div>
         <h2>Articles populaires</h2>
       </div>
