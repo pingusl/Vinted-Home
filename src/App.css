@@ -1,38 +1,56 @@
 .App {
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Header */
+.header {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.logo {
+  flex: 1;
+}
+.search {
+  line-height: 1.5rem;
+  flex: 1;
+  background-color: #f5f6f7;
+  border-style: none;
+}
+.button-group {
+  line-height: 1.5rem;
+  flex: 2;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+.signup-bt {
+  /* height: 2rem; */
+  background-color: white;
+  border-color: #23aeb7;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  color: #23aeb7;
+  font-size: small;
+  padding-left: 5px;
+  padding-right: 5px;
+  /* vertical-align: middle; */
+}
+.selling-bt {
+  /* height: 2rem; */
+  background-color: #23aeb7;
+  border-color: #23aeb7;
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
   color: white;
+  border-radius: 4px;
+  font-size: small;
+  margin-left: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.home {
+  display: flex;
+  margin: 0 auto;
 }

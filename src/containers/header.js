@@ -2,11 +2,16 @@ import logo from "../logo.svg";
 const Header = () => {
   return (
     <header className="header">
-      <span>
-        <img src={logo} className="logo" alt="logo-vinted" />
+      <span className="logo">
+        <img src={logo} className="logo-img" alt="logo-vinted" />
       </span>
-
-      <span></span>
+      <span className="search">
+        <input className="search" type="search" />
+      </span>
+      <span className="button-group">
+        <span className="signup-bt">S'inscrire|Se connecter</span>
+        <span className="selling-bt">Vends tes articles</span>
+      </span>
     </header>
   );
 };
