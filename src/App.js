@@ -5,8 +5,9 @@ import "./App.css";
 function App() {
   return (
     <Router>
+      <Link to="/home">Go to Home</Link>
       <Routes>
-        <Route></Route>
+        <Route path="/home" element={<Home />}></Route>
       </Routes>
     </Router>
   );
