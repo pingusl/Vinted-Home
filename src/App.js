@@ -33,7 +33,7 @@ function App() {
       <Link to="/home">Go to Home</Link>
       <Link to="/offer">Go to Offer</Link>
       <Routes>
-        <Route path="/home" element={<Home props={data} />}></Route>
+        <Route path="/home" element={<Home {...data} />}></Route>
         <Route path="/offer" element={<Offer />}></Route>
       </Routes>
     </Router>
