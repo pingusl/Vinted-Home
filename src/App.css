@@ -53,9 +53,23 @@
 
 /* Main (Home) */
 .home {
+  width: 100vw;
   display: flex;
   margin: 0 auto;
 }
 .banner {
   height: 60vh;
+}
+.offers {
+  display: flex;
+  width: inherit;
+  flex-wrap: wrap;
+}
+.offer {
+  line-height: 25vh;
+}
+.offer-img {
+  width: 20vw;
+  height: 25vh;
+  object-fit: cover;
 }

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import bannerImg from "../img/banner-hero.jpeg";
 //import { useEffect, useState } from "react";
 
@@ -13,10 +14,28 @@ export default function Home(props) {
 
         <img className="banner" src={bannerImg} alt="hero" />
       </div>
-      {console.log(props.data)}
+
       <div>
         <h2>Articles populaires</h2>
       </div>
+      <section className="offers">
+        {props.data.offers.map((offer, index) => {
+          return (
+            <div className="offer" key={index}>
+              <img
+                className="offer-img"
+                src={offer.product_image.secure_url}
+                alt={offer._id}
+                onClick={() => {
+                  console.log(offer._id);
+                }}
+              />
+              <Link to={`/offer/${offer._id}`}></Link>
+              {/* {console.log(offer)} */}
+            </div>
+          );
+        })}
+      </section>
     </div>
   );
 }
