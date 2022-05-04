@@ -1,5 +1,5 @@
 import bannerImg from "../img/banner-hero.jpeg";
-import { useEffect, useState } from "react";
+//import { useEffect, useState } from "react";
 
 export default function Home() {
   return (
