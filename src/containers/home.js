@@ -1,15 +1,20 @@
 import bannerImg from "../img/banner-hero.jpeg";
+import { useEffect, useState } from "react";
+
 export default function Home() {
   return (
     <div className="home-container">
       <div className="banner">
         <div>
           <div className="pop">Prêts à faire du tri dans vos placards?</div>
-          <button className="pop-button">Vends maintenant</button>
+          <button className="selling-bt">Vends maintenant</button>
           <p className="pop-text">découvrez comment ça marche</p>
         </div>
 
-        <img src={bannerImg} alt="hero" />
+        <img className="banner" src={bannerImg} alt="hero" />
+      </div>
+      <div>
+        <h2>Articles populaires</h2>
       </div>
     </div>
   );

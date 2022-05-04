@@ -50,7 +50,12 @@
   padding-left: 5px;
   padding-right: 5px;
 }
+
+/* Main (Home) */
 .home {
   display: flex;
   margin: 0 auto;
+}
+.banner {
+  height: 60vh;
 }
