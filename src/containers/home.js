@@ -1,9 +1,31 @@
 import { Link } from "react-router-dom";
 import bannerImg from "../img/banner-hero.jpeg";
-//import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default function Home(props) {
-  return (
+function Home() {
+  //----Create states for manage data----//
+  const [isLoading, setIsLoading] = useState(true); //To be sur data will be loading
+  const [data, setData] = useState(); //To record the data
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://lereacteur-vinted-api.herokuapp.com/offers"
+        );
+        // console.log(response.data.offers[0]._id);
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return isLoading === true ? (
+    <h1>En cours de chargement 🥁</h1>
+  ) : (
     <div className="home-container">
       <div className="banner">
         <div>
@@ -19,7 +41,7 @@ export default function Home(props) {
         <h2>Articles populaires</h2>
       </div>
       <section className="offers">
-        {props.data.offers.map((offer, index) => {
+        {data.offers.map((offer, index) => {
           return (
             <div className="offer" key={index}>
               <Link to={`offer/${offer._id}`}>
@@ -37,3 +59,5 @@ export default function Home(props) {
     </div>
   );
 }
+
+export default Home;
