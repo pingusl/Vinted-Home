@@ -9,7 +9,8 @@ const Header = () => {
         <input className="search" type="search" />
       </span>
       <span className="button-group">
-        <span className="signup-bt">S'inscrire|Se connecter</span>
+        <span className="sign-bt">S'inscrire</span>
+        <span className="sign-bt">Se connecter</span>
         <span className="selling-bt">Vends tes articles</span>
       </span>
     </header>
