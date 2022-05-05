@@ -26,9 +26,27 @@ const Offer = () => {
 
   // console.log(params.Offer_id);
   return isLoading ? (
-    <div>en cours de chargement</div>
+    <div>en cours de chargement 🥁</div>
   ) : (
-    <div className="offer-container">Offer: {id}</div>
+    <div>
+      <div className="offer-container">Offre: {id}</div>
+      <div>
+        {
+          //Liste des details du produit
+          data.product_details.map((item, index) => {
+            //Met dans le tableau keys la clef et son contenu
+            const keys = Object.keys(item);
+            return (
+              <div key={index}>
+                {/* {Affiche le contenu du tableau keys créé par Object.keys} */}
+                {keys[0]}:{item[keys[0]]}
+                {console.log(item)}
+              </div>
+            );
+          })
+        }
+      </div>
+    </div>
   );
 };
 export default Offer;
