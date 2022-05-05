@@ -1,47 +1,66 @@
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Signup = () => {
-  const formSubmit = () => {
-    const $ = document;
-    $.addEventListener("DOMContentLoaded", () => {
-      console.log("document loaded");
-      $.querySelector("#contactForm").addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const data = {
-          email: $.querySelector("#email").value,
-          username: $.querySelector("#username").value,
-          password: $.querySelector("#password").value,
-          newsletter: $.querySelector("#newsletter").value,
-        };
-        /* console.log(data); */
-        const response = await axios.post(
-          "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-          data
-        );
-        console.log(response);
-      });
-    });
-  };
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [newsletter, setNewsletter] = useState(false);
+  const [requestData, setRequestData] = useState();
+  const [isLoading, setIsLoading] = useState(true);
+  //const formSubmit = use(useEffect());
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // const response = await axios.post(
+        //   "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+        //   {
+        //     username: username,
+        //     email: email,
+        //     password: password,
+        //     newletter: newsletter,
+        //   }
+        // );
+        console.log(username);
+        console.log(email);
+        console.log(password);
+        //setRequestData = response.data;
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="signup-container">
-      {" "}
       <form className="form-contact" id="#contactForm">
         <h1>S'inscrire</h1>
         <input
           type="text"
           placeholder="Nom utilisateur"
-          name="username"
-          id="#username"
+          onChange={(event) => {
+            setUsername(event.target.value);
+          }}
+          value={username}
         />
 
-        <input type="email" placeholder="Email" name="email" id="#email" />
+        <input
+          type="email"
+          placeholder="Email"
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+          value={email}
+        />
         <input
           type="password"
           placeholder="Mot de passe"
-          name="password"
-          id="password"
+          onChange={(event) => {
+            setPassword(event.target.value);
+          }}
+          value={password}
         />
 
         <div>
@@ -49,13 +68,7 @@ const Signup = () => {
           <label className="checkbox-text">S'inscrire à notre newsletter</label>
         </div>
 
-        <button
-          className="green-bt"
-          type="submit"
-          onClick={() => {
-            formSubmit();
-          }}
-        >
+        <button className="green-bt" type="submit">
           S'inscrire
         </button>
 
