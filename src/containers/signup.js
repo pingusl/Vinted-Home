@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Signup = () => {
-  const [username, setUsername] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
   const [requestData, setRequestData] = useState();
   const [isLoading, setIsLoading] = useState(true);
@@ -13,15 +13,10 @@ const Signup = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const response = await axios.post(
-        //   "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        //   {
-        //     username: username,
-        //     email: email,
-        //     password: password,
-        //     newletter: newsletter,
-        //   }
-        // );
+        const response = await axios.post(
+          "https://lereacteur-vinted-api.herokuapp.com/user/signup",
+          requestData
+        );
         console.log(username);
         console.log(email);
         console.log(password);
@@ -68,7 +63,18 @@ const Signup = () => {
           <label className="checkbox-text">S'inscrire à notre newsletter</label>
         </div>
 
-        <button className="green-bt" type="submit">
+        <button
+          className="green-bt"
+          type="submit"
+          onClick={() => {
+            setRequestData({
+              email: `"${email}"`,
+              username: `"${username}"`,
+              password: `"${password}"`,
+              newsletter: true,
+            });
+          }}
+        >
           S'inscrire
         </button>
 
