@@ -74,3 +74,11 @@
   height: 25vh;
   object-fit: cover;
 }
+/* SignUp */
+.signup-container {
+  display: flex;
+}
+.form-contact {
+  display: flex;
+  flex-direction: column;
+}

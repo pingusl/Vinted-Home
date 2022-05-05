@@ -3,7 +3,7 @@ const Signup = () => {
   return (
     <div className="signup-container">
       {" "}
-      <form id="form-contact">
+      <form className="form-contact">
         <h1>S'inscrire</h1>
         <input
           type="text"
@@ -19,9 +19,12 @@ const Signup = () => {
           name="password"
           id="password"
         />
-        <legend>
-          <checkbox>S'inscrire à note newsletter</checkbox>
-        </legend>
+
+        <div>
+          <input type="checkbox" />
+          <label className="checkbox-text">S'inscrire à notre newsletter</label>
+        </div>
+
         <button type="submit" value="signup">
           S'inscrire
         </button>
