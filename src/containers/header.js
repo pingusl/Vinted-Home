@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logo from "../logo.svg";
 const Header = () => {
   return (
@@ -9,9 +10,13 @@ const Header = () => {
         <input className="search" type="search" />
       </span>
       <span className="button-group">
-        <span className="sign-bt">S'inscrire</span>
-        <span className="sign-bt">Se connecter</span>
-        <span className="selling-bt">Vends tes articles</span>
+        <Link className="sign-bt" to="/signup">
+          <span>S'inscrire</span>
+        </Link>
+        <Link className="sign-bt" to="/signin">
+          <span>Se connecter</span>
+        </Link>
+        <span className="green-bt">Vends tes articles</span>
       </span>
     </header>
   );
