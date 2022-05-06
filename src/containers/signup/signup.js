@@ -35,13 +35,11 @@ const Signup = ({ setUser }) => {
         Cookies.set("token", response.data.token);
 
         //----rediriger vers page principal----//
-
         navigate("/");
         //console.log("redirection de la page réalisée");
       }
 
-      console.log(response);
-      setMessage = response.data.status;
+      //console.log(response);
     } catch (error) {
       console.log(error.response.status);
 
@@ -52,20 +50,6 @@ const Signup = ({ setUser }) => {
     }
   };
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.post(
-  //       "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-  //       JSON.stringify(data)
-  //     );
-  //     // setIsLoading(false);
-  //     console.log(response);
-  //     //setRequestData = response.data;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // fetchData();
   return (
     <div className="signup-container">
       <form className="form-contact" id="#contactForm" onSubmit={objectRequest}>
@@ -101,7 +85,7 @@ const Signup = ({ setUser }) => {
             type="checkbox"
             id="#newsletter"
             onChange={(event) => {
-              setPassword(event.target.checked);
+              setNewsletter(event.target.checked);
             }}
           />
           <label className="checkbox-text">S'inscrire à notre newsletter</label>
