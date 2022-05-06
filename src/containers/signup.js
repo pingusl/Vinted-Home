@@ -3,34 +3,48 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Signup = () => {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("JohnDoe");
+  const [email, setEmail] = useState("johndoe@lereacteur.io");
+  const [password, setPassword] = useState("azerty");
   const [newsletter, setNewsletter] = useState(false);
-  const [requestData, setRequestData] = useState();
+  //const [requestData, setRequestData] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   //const formSubmit = use(useEffect());
+  const ObjectRequest = () => {
+    return console.log("ObjectRequest activé");
+  };
   useEffect(() => {
+    const data = {
+      email: email,
+      username: username,
+      password: password,
+      newsletter: newsletter,
+    };
+    console.log(email);
+    console.log(password);
+    console.log(data); //Sans stringify reponse serveur > erreur 409
+    console.log(JSON.stringify(data)); //Avec stringify reponse serveur > erreur 400
+
     const fetchData = async () => {
       try {
         const response = await axios.post(
           "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-          requestData
+          JSON.stringify(data)
         );
-        console.log(username);
-        console.log(email);
-        console.log(password);
+        setIsLoading(false);
+
         //setRequestData = response.data;
       } catch (error) {
-        console.log(error.message);
+        console.log(error);
       }
     };
     fetchData();
   }, []);
-
-  return (
+  return isLoading === true ? (
+    <h1>En chargement 🥁</h1>
+  ) : (
     <div className="signup-container">
-      <form className="form-contact" id="#contactForm">
+      <form className="form-contact" id="#contactForm" onSubmit={ObjectRequest}>
         <h1>S'inscrire</h1>
         <input
           type="text"
@@ -63,18 +77,7 @@ const Signup = () => {
           <label className="checkbox-text">S'inscrire à notre newsletter</label>
         </div>
 
-        <button
-          className="green-bt"
-          type="submit"
-          onClick={() => {
-            setRequestData({
-              email: `"${email}"`,
-              username: `"${username}"`,
-              password: `"${password}"`,
-              newsletter: true,
-            });
-          }}
-        >
+        <button className="green-bt" type="submit">
           S'inscrire
         </button>
 
@@ -85,4 +88,5 @@ const Signup = () => {
     </div>
   );
 };
+
 export default Signup;
