@@ -1,13 +1,38 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import Cookies from "cookies-js";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
-  const objectRequest = () => {
-    console.log("le bouton fonctionne");
+  const objectRequest = async (event) => {
+    try {
+      event.preventDefault();
+      //console.log("le bouton fonctionne");
+      const data = { email: email, password: password };
+
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/user/login",
+        data
+      );
+      if (response.status === 200) {
+        //  console.log("access granted!");
+        navigate("/");
+      }
+    } catch (error) {
+      console.log("access refused");
+      setMessage("Paramêtres de connexion incorrect...");
+    }
+
+    // const token = Cookies.get("token");
+    // console.log(data);
+    // console.log(response.data.token);
+    // console.log(response.status);
+    // console.log(token);
   };
   return (
     <div className="signin-container">
