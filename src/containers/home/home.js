@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import bannerImg from "../img/banner-hero.jpeg";
+import bannerImg from "../../img/banner-hero.jpeg";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
