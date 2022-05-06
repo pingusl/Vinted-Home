@@ -3,7 +3,7 @@ import { useState } from "react";
 import Header from "./containers/header/header";
 import Home from "./containers/home/home";
 import Signup from "./containers/signup/signup";
-import Login from "./containers/login/login";
+import Signin from "./containers/signin/signin";
 import Offer from "./containers/offer/offer";
 import NoMatch from "./containers/nomatch";
 import Cookies from "cookies-js";
@@ -32,7 +32,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup setUser={setUser} />} />
-        <Route path="/login" element={<Login />} />
+        {/* passage de la fonction -setUser- en props de Signup */}
+        <Route path="/signin" element={<Signin />} />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
