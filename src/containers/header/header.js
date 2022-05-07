@@ -2,9 +2,15 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../logo.svg";
 import magnifyingGlass from "../../img/loupe.svg";
+import Search from "../search/search";
 import "./header.scss";
+
 const Header = () => {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState("Rechercher des articles");
+  const handleSearch = () => {
+    console.log(searchInput);
+    return <p>{searchInput}</p>;
+  };
   return (
     <header className="header">
       <span className="logo">
@@ -19,8 +25,12 @@ const Header = () => {
             <input
               className="search-input"
               type="text"
+              onClick={(event) => {
+                setSearchInput("");
+              }}
               onChange={(event) => {
                 setSearchInput(event.target.value);
+                handleSearch();
               }}
               value={searchInput}
             />
@@ -29,6 +39,9 @@ const Header = () => {
             <button className="clear-bt" type="button">
               X
             </button>
+          </div>
+          <div className="search-result">
+            <Search className="search-result-componant" />
           </div>
         </form>
       </span>
