@@ -8,7 +8,7 @@ import "./header.scss";
 const Header = () => {
   const [searchInput, setSearchInput] = useState("Rechercher des articles");
   const handleSearch = () => {
-    console.log(searchInput);
+    //   console.log(searchInput);
     return <p>{searchInput}</p>;
   };
   return (
@@ -17,31 +17,45 @@ const Header = () => {
         <img src={logo} className="logo-img" alt="logo-vinted" />
       </span>
       <span className="search">
-        <form className="search-bar" id="#search-bar">
-          <div className="search-img">
-            <img className="search-img" src={magnifyingGlass} alt="search" />
-          </div>
-          <div className="search-input">
-            <input
-              className="search-input"
-              type="text"
-              onClick={(event) => {
-                setSearchInput("");
-              }}
-              onChange={(event) => {
-                setSearchInput(event.target.value);
-                handleSearch();
-              }}
-              value={searchInput}
-            />
-          </div>
-          <div className="search-clear">
-            <button className="clear-bt" type="button">
-              X
-            </button>
+        <form className="search-form" id="#search-bar">
+          <div className="search-bar">
+            <div className="search-img">
+              <img className="search-img" src={magnifyingGlass} alt="search" />
+            </div>
+            <div className="search-input">
+              <input
+                className="search-input"
+                type="text"
+                onClick={(event) => {
+                  setSearchInput("");
+                }}
+                onChange={(event) => {
+                  setSearchInput(event.target.value);
+                  handleSearch();
+                }}
+                value={searchInput}
+              />
+            </div>
+            <div className="search-clear">
+              <button className="clear-bt" type="button">
+                X
+              </button>
+            </div>
           </div>
           <div className="search-result">
-            <Search className="search-result-componant" />
+            {" "}
+            <div
+              className={
+                searchInput !== ""
+                  ? "search-result-componant show"
+                  : "search-result-componant hide"
+              }
+            >
+              <Search
+                className="search-result-componant show"
+                searchInput={searchInput}
+              />
+            </div>
           </div>
         </form>
       </span>
