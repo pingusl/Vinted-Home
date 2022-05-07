@@ -43,7 +43,6 @@ const Header = () => {
             </div>
           </div>
           <div className="search-result">
-            {" "}
             <div
               className={
                 searchInput !== ""
