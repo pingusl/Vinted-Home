@@ -12,6 +12,13 @@
   flex: 1;
   background-color: #f5f6f7;
   border-style: none;
+  .search-img {
+    width: 1rem;
+    color: #999999;
+  }
+  .clear-bt {
+    border-style: none;
+  }
 }
 .button-group {
   line-height: 1.5rem;
