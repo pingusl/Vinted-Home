@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import bannerImg from "../../img/banner-hero.jpeg";
+import tornImg from "../../img/effet-déchiré.png";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./home.scss";
@@ -31,11 +32,17 @@ function Home() {
       <div className="banner">
         <div className="selling-now">
           <h1>Prêts à faire du tri dans vos placards?</h1>
-          <button className="selling-bt">Vends maintenant</button>
-          <p className="pop-text">découvrez comment ça marche</p>
+          <button className="green-bt selling-bt">Vends maintenant</button>
+          <p className="pop-text">Découvrir comment ça marche</p>
         </div>
-
-        <img className="banner" src={bannerImg} alt="hero" />
+        <div className="wrapper">
+          <div className="banner">
+            <img className="banner" src={bannerImg} alt="hero" />
+          </div>
+          <div className="tornImg">
+            <img className="tornImg" src={tornImg} alt="torn" />
+          </div>
+        </div>
       </div>
 
       <div>
