@@ -1,7 +1,9 @@
+import { useState } from "react";
 import axios from "axios";
 const Search = (props) => {
   const tab = [];
-  let char = "";
+  const [result, setResult] = useState("");
+
   const fetchData = async () => {
     try {
       const response = await axios.get(
@@ -16,22 +18,24 @@ const Search = (props) => {
           }
         }
       }
-      console.log(tab);
-      tab.map((item) => {
-        //   console.log(item.key);
-        //   return <p>{item.props.children}</p>;
-        char = <p>item.props.children</p>;
-      });
-      console.log(`line 25: ${char}`);
+
+      setResult(
+        tab.map((item) => {
+          return <p>{item.props.children}</p>;
+        })
+      );
     } catch (error) {
       console.log(error);
     }
   };
 
-  fetchData();
-
-  console.log({ tab });
-
-  return <>{props.searchInput}</>;
+  if (props.searchInput.length > 3) {
+    fetchData();
+  }
+  return (
+    <>
+      <div>{result}</div>
+    </>
+  );
 };
 export default Search;

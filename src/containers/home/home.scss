@@ -6,6 +6,18 @@
 }
 .banner {
   height: 60vh;
+  .selling-now {
+    position: absolute;
+    top: 200px;
+    left: 30px;
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 5px;
+  }
 }
 .offers {
   display: flex;

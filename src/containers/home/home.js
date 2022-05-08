@@ -29,8 +29,8 @@ function Home() {
   ) : (
     <div className="home-container">
       <div className="banner">
-        <div>
-          <div className="pop">Prêts à faire du tri dans vos placards?</div>
+        <div className="selling-now">
+          <h1>Prêts à faire du tri dans vos placards?</h1>
           <button className="selling-bt">Vends maintenant</button>
           <p className="pop-text">découvrez comment ça marche</p>
         </div>
