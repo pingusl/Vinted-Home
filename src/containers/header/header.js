@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../logo.svg";
 import magnifyingGlass from "../../img/loupe.svg";
-import Search from "../search/search";
+
 import "./header.scss";
 
 const Header = () => {
@@ -49,12 +49,7 @@ const Header = () => {
                   ? "search-result-componant show"
                   : "search-result-componant hide"
               }
-            >
-              <Search
-                className="search-result-componant show"
-                searchInput={searchInput}
-              />
-            </div>
+            ></div>
           </div>
         </form>
       </span>
