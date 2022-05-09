@@ -1,61 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
 import logo from "../../logo.svg";
-import magnifyingGlass from "../../img/loupe.svg";
-//import Filter from "../filter/filter";
+import Filter from "../filter/filter";
 
 import "./header.scss";
 
 const Header = () => {
-  const [searchInput, setSearchInput] = useState("Rechercher des articles");
   const navigate = useNavigate();
-  const handleSearch = () => {
-    //   console.log(searchInput);
-    return <p>{searchInput}</p>;
-  };
+
   return (
     <header className="header">
       <span className="logo">
         <img src={logo} className="logo-img" alt="logo-vinted" />
       </span>
-      <span className="search">
-        <form className="search-form" id="#search-bar">
-          <div className="search-bar">
-            <div className="search-img">
-              <img className="search-img" src={magnifyingGlass} alt="search" />
-            </div>
-            <div className="search-input">
-              <input
-                className="search-input"
-                type="text"
-                onClick={(event) => {
-                  setSearchInput("");
-                }}
-                onChange={(event) => {
-                  setSearchInput(event.target.value);
-                  handleSearch();
-                }}
-                value={searchInput}
-              />
-            </div>
-            <div className="search-clear">
-              <button className="clear-bt" type="button">
-                X
-              </button>
-            </div>
-          </div>
-          <div className="search-range">search-range</div>
-          <div className="search-result">
-            <div
-              className={
-                searchInput !== ""
-                  ? "search-result-componant show"
-                  : "search-result-componant hide"
-              }
-            ></div>
-          </div>
-        </form>
-      </span>
+      <Filter />
+
       <span className="button-group">
         <Link className="sign-bt" to="/signup">
           <span>S'inscrire</span>

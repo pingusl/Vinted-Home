@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./signin.scss";
 
-const Signin = () => {
+const Signin = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
@@ -19,7 +19,8 @@ const Signin = () => {
         "https://lereacteur-vinted-api.herokuapp.com/user/login",
         data
       );
-      if (response.status === 200) {
+      if (response.data.token) {
+        setUser(response.data.token);
         //  console.log("access granted!");
         navigate("/");
       }
