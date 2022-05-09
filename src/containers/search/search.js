@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
+//useEffect(() => {
 const Search = (props) => {
   const tab = [];
   const [result, setResult] = useState("");
@@ -28,15 +29,17 @@ const Search = (props) => {
       console.log(error);
     }
   };
-
-  if (props.searchInput.length > 3) {
-    fetchData();
-  }
+  useEffect(() => {
+    if (props.searchInput.length > 3) {
+      fetchData();
+    }
+  }, []);
   return (
     <>
       <div>{result}</div>
     </>
   );
 };
+//}, []);
 
 export default Search;

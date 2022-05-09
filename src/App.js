@@ -5,6 +5,7 @@ import Home from "./containers/home/home";
 import Signup from "./containers/signup/signup";
 import Signin from "./containers/signin/signin";
 import Offer from "./containers/offer/offer";
+import Publish from "./containers/publish/publish";
 import NoMatch from "./containers/nomatch";
 import Cookies from "cookies-js";
 import "./App.css";
@@ -35,6 +36,7 @@ function App() {
         {/* passage de la fonction -setUser- en props de Signup */}
         <Route path="/signin" element={<Signin />} />
         <Route path="/offer/:id" element={<Offer />} />
+        <Route path="/publish/:id" element={<Publish />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </Router>
