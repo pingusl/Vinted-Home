@@ -19,11 +19,9 @@ const Publish = () => {
       brand: "Nike",
       size: 44,
       color: "blue",
-      picture: "", // le fichier image sélectionné par l'utilisateur
+      picture: "",
     };
-    console.log(params);
-    const formData = new FormData();
-    formData.append({ params });
+
     // const response = await axios.post(
     //   "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
     //   params,
@@ -32,7 +30,20 @@ const Publish = () => {
     return !Cookies.get("token") ? (
       <Navigate to="/sigin" />
     ) : (
-      <h1>Page publish token={token}</h1>
+      <div>
+        <h1>Page publish token={token}</h1>
+        <form>
+          <input type="text" placeholder="Titre" />
+          <input type="text" placeholder="descritpion" />
+          <input type="text" placeholder="prix" />
+          <input type="text" placeholder="condition" />
+          <input type="text" placeholder="ville" />
+          <input type="text" placeholder="marque" />
+          <input type="text" placeholder="taille" />
+          <input type="text" placeholder="couleur" />
+          <input type="file" placeholder="photo" />
+        </form>
+      </div>
     );
   } catch (error) {
     console.log(error);
