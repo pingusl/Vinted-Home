@@ -59,6 +59,17 @@ function Home() {
                   alt={offer._id}
                 />
               </Link>
+              <div className="offer-details">
+                <span className="offer-article-details"></span>
+                <div className="article-price">
+                  {offer.product_price}&nbsp;€
+                </div>
+                <div className="article-size"></div>
+                <div className="article-brand">
+                  {offer.product_details[0].MARQUE}
+                </div>
+                <span className="offer-like"></span>
+              </div>
               {/* {console.log(offer)} */}
             </div>
           );

@@ -1,5 +1,8 @@
 /* Header */
 .header {
+  // position: absolute;
+  // top: 200;
+  // left: 200;
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -32,13 +35,13 @@
       .search-input {
         width: 100%;
         // font-family: inherit;
-        // font-size: medium;
-        // color: #535353;
+        font-size: medium;
+        color: #535353;
         border: none;
         outline: none;
         background-color: transparent;
         // padding: 1px 2px;
-        // -webkit-font-smoothing: antialiased;
+        -webkit-font-smoothing: antialiased;
         // -webkit-appearance: none;
         // cursor: pointer;
       }
@@ -78,6 +81,7 @@
   padding-left: 5px;
   padding-right: 5px;
   margin-left: 5px;
+  text-decoration: none;
   /* vertical-align: middle; */
 }
 .green-bt {
@@ -93,6 +97,7 @@
   margin-left: 10px;
   padding-left: 5px;
   padding-right: 5px;
+  cursor: pointer;
 }
 .hide {
   display: none;
