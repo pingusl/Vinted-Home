@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import bannerImg from "../../img/banner-hero.jpeg";
 import tornImg from "../../img/effet-déchiré.png";
 import axios from "axios";
@@ -9,6 +9,7 @@ function Home() {
   //----Create states for manage data----//
   const [isLoading, setIsLoading] = useState(true); //To be sur data will be loading
   const [data, setData] = useState(); //To record the data
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,7 +33,14 @@ function Home() {
       <div className="banner">
         <div className="selling-now">
           <h1>Prêts à faire du tri dans vos placards?</h1>
-          <button className="green-bt selling-bt">Vends maintenant</button>
+          <button
+            className="green-bt selling-bt"
+            onClick={() => {
+              navigate("/publish");
+            }}
+          >
+            Vends maintenant
+          </button>
           <p className="pop-text">Découvrir comment ça marche</p>
         </div>
         <div className="wrapper">

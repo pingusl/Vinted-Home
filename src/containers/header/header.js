@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "../../logo.svg";
 import magnifyingGlass from "../../img/loupe.svg";
+//import Filter from "../filter/filter";
 
 import "./header.scss";
 
 const Header = () => {
   const [searchInput, setSearchInput] = useState("Rechercher des articles");
+  const navigate = useNavigate();
   const handleSearch = () => {
     //   console.log(searchInput);
     return <p>{searchInput}</p>;
@@ -42,6 +44,7 @@ const Header = () => {
               </button>
             </div>
           </div>
+          <div className="search-range">search-range</div>
           <div className="search-result">
             <div
               className={
@@ -60,7 +63,14 @@ const Header = () => {
         <Link className="sign-bt" to="/signin">
           <span>Se connecter</span>
         </Link>
-        <span className="green-bt">Vends tes articles</span>
+        <span
+          className="green-bt"
+          onClick={() => {
+            navigate("/publish");
+          }}
+        >
+          Vends tes articles
+        </span>
       </span>
     </header>
   );

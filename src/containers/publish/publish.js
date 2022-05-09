@@ -1,52 +1,142 @@
+import { useState } from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "cookies-js";
 import axios from "axios";
 
 const Publish = () => {
-  try {
+  const token = Cookies.get("token");
+  console.log(token);
+
+  const [title, setTitle] = useState("t");
+  const [description, setDescription] = useState("d");
+  const [price, setPrice] = useState("p");
+  const [condition, setCondition] = useState("c");
+  const [city, setCity] = useState("c");
+  const [brand, setBrand] = useState("m");
+  const [size, setSize] = useState("s");
+  const [color, setColor] = useState("c");
+  const [picture, setPicture] = useState(null);
+  const [isPictureSending, setIsPictureSending] = useState(false); //Pour la gestion de l'affichage de l'image en upload
+  const [data, setData] = useState(null); //Pour la gestion de l'affichage de l'image en upload
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setIsPictureSending(true);
+    const formData = new FormData();
+
+    formData.append("title", title);
+    formData.append("description", description);
+    formData.append("condition", condition);
+    formData.append("city", city);
+    formData.append("brand", brand);
+    formData.append("size", size);
+    formData.append("price", price);
+    formData.append("color", color);
+    formData.append("picture", picture);
     console.log("publish");
     //aller chercher le token dans le cookie--> ok
-    const token = Cookies.get("token");
-    //si pas de token, rediriger vers authentification-->ok
-    //Charger les données à envoyer dans params a l'aide de formData.append
-    //envoyer une requête au serveur pour enregistrer une nouvelle offre
-    const params = {
-      title: "Air Max 90",
-      description: "Toutes neuves",
-      price: 120,
-      condition: "Neuf",
-      city: "Paris",
-      brand: "Nike",
-      size: 44,
-      color: "blue",
-      picture: "",
-    };
 
-    // const response = await axios.post(
-    //   "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
-    //   params,
-    //   { headers: { authorization: "Bearer " + token } }
-    // );
-    return !Cookies.get("token") ? (
-      <Navigate to="/sigin" />
-    ) : (
-      <div>
-        <h1>Page publish token={token}</h1>
-        <form>
-          <input type="text" placeholder="Titre" />
-          <input type="text" placeholder="descritpion" />
-          <input type="text" placeholder="prix" />
-          <input type="text" placeholder="condition" />
-          <input type="text" placeholder="ville" />
-          <input type="text" placeholder="marque" />
-          <input type="text" placeholder="taille" />
-          <input type="text" placeholder="couleur" />
-          <input type="file" placeholder="photo" />
-        </form>
-      </div>
-    );
-  } catch (error) {
-    console.log(error);
-  }
+    //si pas de token, rediriger vers authentification-->ok
+    //Charger les données à envoyer dans formData a l'aide de formData.append-->ok
+    //envoyer une requête au serveur pour enregistrer une nouvelle offre-->ok
+    console.log(formData);
+    try {
+      const response = await axios.post(
+        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        formData,
+        { headers: { authorization: "Bearer " + token } }
+      );
+      setData(response.data);
+      setIsPictureSending(false);
+      console.log(response);
+    } catch (error) {
+      console.log(error.response);
+    }
+  };
+
+  return !Cookies.get("token") ? (
+    <Navigate to="/sigin" />
+  ) : (
+    <div>
+      <h1>Page publish token={token}</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Titre"
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="description"
+          onChange={(event) => {
+            setDescription(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="prix"
+          onChange={(event) => {
+            setPrice(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="condition"
+          onChange={(event) => {
+            setCondition(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="ville"
+          onChange={(event) => {
+            setCity(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="marque"
+          onChange={(event) => {
+            setBrand(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="taille"
+          onChange={(event) => {
+            setSize(event.target.value);
+          }}
+        />
+        <input
+          type="text"
+          placeholder="couleur"
+          onChange={(event) => {
+            setColor(event.target.value);
+          }}
+        />
+        <input
+          type="file"
+          placeholder="photo"
+          onChange={(event) => {
+            setPicture(event.target.files[0]);
+          }}
+        />
+        <input type="submit" />
+      </form>
+      {isPictureSending === true ? (
+        <div>Image en chargement</div>
+      ) : (
+        data && (
+          <img
+            src={data.product_image.secure_url}
+            style={{ width: "200px" }}
+            alt=""
+          />
+        )
+      )}
+    </div>
+  );
 };
 export default Publish;

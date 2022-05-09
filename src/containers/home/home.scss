@@ -52,14 +52,15 @@
 .offers {
   display: flex;
   width: inherit;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
   .offer-img {
     width: 20vw;
     height: 300px;
     object-fit: cover;
   }
   .offer {
-    line-height: 25vh;
+    padding-top: 3rem;
     padding-right: 12px;
     .offer-details {
       line-height: 2rem;

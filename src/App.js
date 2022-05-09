@@ -16,7 +16,7 @@ function App() {
     if (token !== null) {
       //Action de connexion
       console.log("création cookie");
-      Cookies.set("userToken", token);
+      Cookies.set("userToken", token, { expire: 7 });
     } else {
       //Action de déconnexion
       console.log("suppression cookie");
@@ -27,7 +27,7 @@ function App() {
   };
   return (
     <Router>
-      <Header />
+      <Header token={token} setUser={setUser} />
       <Link to="/">Go to Home</Link>
       <Link to="/offer">Go to Offer</Link>
       <Routes>
