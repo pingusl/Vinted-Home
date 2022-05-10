@@ -5,18 +5,36 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import "./home.scss";
 
-function Home() {
+function Home({
+  token,
+  setToken,
+  searchInput,
+  setSearchInput,
+  priceMin,
+  setPriceMin,
+  priceMax,
+  setPriceMax,
+  sort,
+  setSort,
+  data,
+  setData,
+  dataFilter,
+  setDataFilter,
+  isLoading,
+  setIsLoading,
+}) {
   //----Create states for manage data----//
-  const [isLoading, setIsLoading] = useState(true); //To be sur data will be loading
-  const [data, setData] = useState(); //To record the data
+
+  // const [data, setData] = useState(); //To record the data
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://lereacteur-vinted-api.herokuapp.com/offers"
+          `https://lereacteur-vinted-api.herokuapp.com/offers`
         );
         // console.log(response.data.offers[0]._id);
+        // console.log(response.data.offers);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -25,7 +43,7 @@ function Home() {
     };
     fetchData();
   }, []);
-
+  // console.log(isLoading);
   return isLoading === true ? (
     <h1>En cours de chargement 🥁</h1>
   ) : (

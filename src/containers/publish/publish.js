@@ -4,9 +4,10 @@ import Cookies from "cookies-js";
 import axios from "axios";
 
 const Publish = () => {
-  const token = Cookies.get("token");
+  const token = Cookies.get("userToken");
   console.log(token);
 
+  //----States offer----//
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
@@ -19,6 +20,7 @@ const Publish = () => {
   const [isPictureSending, setIsPictureSending] = useState(false); //Pour la gestion de l'affichage de l'image en upload
   const [data, setData] = useState(null); //Pour la gestion de l'affichage de l'image en upload
 
+  //---OnClick function----//
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsPictureSending(true);
@@ -34,11 +36,7 @@ const Publish = () => {
     formData.append("color", color);
     formData.append("picture", picture);
     console.log("publish");
-    //aller chercher le token dans le cookie--> ok
 
-    //si pas de token, rediriger vers authentification-->ok
-    //Charger les données à envoyer dans formData a l'aide de formData.append-->ok
-    //envoyer une requête au serveur pour enregistrer une nouvelle offre-->ok
     console.log(formData);
     try {
       const response = await axios.post(
@@ -54,8 +52,8 @@ const Publish = () => {
     }
   };
 
-  return !Cookies.get("token") ? (
-    <Navigate to="/sigin" />
+  return token ? (
+    <Navigate to="/signin" />
   ) : (
     <div>
       <h1>Page publish token={token}</h1>

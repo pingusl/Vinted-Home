@@ -1,11 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
+//import { useState } from "react";
 import logo from "../../logo.svg";
 import Filter from "../filter/filter";
-import Cookies from "cookies-js";
+import Cookies from "js-cookie";
 import "./header.scss";
-
+const token = Cookies.get("userToken");
+const removeToken = () => {
+  Cookies.remove("userToken");
+};
 const Header = ({
-  token,
+  setToken,
   setUser,
   searchInput,
   setSearchInput,
@@ -17,8 +21,10 @@ const Header = ({
   setSort,
   data,
   setData,
-  showResult,
-  setShowResult,
+  dataFilter,
+  setDataFilter,
+  isLoading,
+  setIsLoading,
 }) => {
   const navigate = useNavigate();
   console.log(token);
@@ -37,13 +43,14 @@ const Header = ({
         sort={setSort}
         data={data}
         setData={setData}
-        showResult={showResult}
-        setShowResult={setShowResult}
+        dataFilter={setDataFilter}
+        IsLoading={isLoading}
+        setIsLoading={setIsLoading}
       />
 
       <span className="button-group">
         {
-          //Si il n'y a pas de token--->affichage des boutons de connexion ou inscription
+          //Si il n'y a pas de token---affichage des boutons de connexion ou inscription
           token === null ? (
             <>
               <Link className="sign-bt" to="/signup">
@@ -58,7 +65,8 @@ const Header = ({
             <span
               className="sign-bt"
               onClick={() => {
-                Cookies.remove("token");
+                removeToken();
+
                 navigate("/");
               }}
             >

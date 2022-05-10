@@ -30,10 +30,10 @@ const Signin = ({ setUser }) => {
       setMessage("Paramêtres de connexion incorrect...");
     }
 
-    // const token = Cookies.get("token");
+    // const token = Cookies.get("userToken");
 
     // console.log(response.status);
-    // console.log(token);
+    // console.log(userToken);
   };
   return (
     <div className="signin-container">

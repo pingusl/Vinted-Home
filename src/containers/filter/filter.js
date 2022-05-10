@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import magnifyingGlass from "../../img/loupe.svg";
 import axios from "axios";
 
@@ -11,41 +11,28 @@ const Filter = ({
   setPriceMax,
   sort,
   setSort,
-  data,
-  setData,
-  showResult,
-  setShowResult,
+  dataFilter,
+  setDataFilter,
+  isLoading,
+  setIsLoading,
 }) => {
   const [skip, setSkip] = useState(null);
   const [limite, setLimite] = useState(10);
-
-  const handleSearch = async (event) => {
-    //event.preventDefault();
-
-    const response = await axios.get(
-      `https://lereacteur-vinted-api.herokuapp.com/offers?title=${searchInput}&priceMin=${priceMin}&priceMax=${priceMax}&sort=${sort}&skip=${skip}&limit=${limite}`
-    );
-    // console.log(response.data.offers);
-    // console.log(response.data.offers.length);
-    setData(response.data);
-    // console.log(data.offers);
-    // data.offers.map((offer, index) => {
-    //   setShowResult(
-    //     <div className="offer" key={index}>
-    //       <div className="offer-details">
-    //         <span className="offer-article-details">{offer.product_name}</span>
-    //         <span className="article-price">{offer.product_price}&nbsp;€</span>
-    //         <span className="article-size"></span>
-
-    //         <span className="offer-like"></span>
-    //       </div>
-    //       {/* {console.log(offer)} */}
-    //     </div>
-    //   );
-    //   return console.log(data.offers);
-    // });
-  };
-
+  useEffect(() => {
+    const handleSearch = async (event) => {
+      try {
+        const response = await axios.get(
+          `https://lereacteur-vinted-api.herokuapp.com/offers?title=${searchInput}&priceMin=${priceMin}&priceMax=${priceMax}&sort=${sort}&skip=${skip}&limit=${limite}`
+        );
+        console.log(response.data);
+        setDataFilter(response.data);
+        // setIsLoading(false);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    handleSearch();
+  }, [searchInput, priceMin, priceMax, sort, limite, skip]);
   return (
     <span className="search">
       <form className="search-form" id="#search-bar">
@@ -62,7 +49,7 @@ const Filter = ({
               }}
               onChange={(event) => {
                 setSearchInput(event.target.value);
-                handleSearch();
+                // handleSearch();
               }}
               value={searchInput}
             />
@@ -73,7 +60,7 @@ const Filter = ({
             </button>
           </div>
         </div>
-        <div className="search-range">{showResult}</div>
+        <div className="search-range"></div>
         <div className="search-result">
           <div
             className={
@@ -95,7 +82,7 @@ const Filter = ({
               </option>
               <option value="price-desc">max min</option>
             </select>
-            <input type="range" name="" />
+
             <input
               type="text"
               className="price"

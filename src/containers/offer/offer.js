@@ -40,7 +40,7 @@ const Offer = () => {
               <div key={index}>
                 {/* {Affiche le contenu du tableau keys créé par Object.keys} */}
                 {keys[0]}:{item[keys[0]]}
-                {console.log(item)}
+                {/*console.log(item)*/}
               </div>
             );
           })
