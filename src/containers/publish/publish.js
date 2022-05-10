@@ -7,14 +7,14 @@ const Publish = () => {
   const token = Cookies.get("token");
   console.log(token);
 
-  const [title, setTitle] = useState("t");
-  const [description, setDescription] = useState("d");
-  const [price, setPrice] = useState("p");
-  const [condition, setCondition] = useState("c");
-  const [city, setCity] = useState("c");
-  const [brand, setBrand] = useState("m");
-  const [size, setSize] = useState("s");
-  const [color, setColor] = useState("c");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
+  const [condition, setCondition] = useState("");
+  const [city, setCity] = useState("");
+  const [brand, setBrand] = useState("");
+  const [size, setSize] = useState("");
+  const [color, setColor] = useState("");
   const [picture, setPicture] = useState(null);
   const [isPictureSending, setIsPictureSending] = useState(false); //Pour la gestion de l'affichage de l'image en upload
   const [data, setData] = useState(null); //Pour la gestion de l'affichage de l'image en upload
@@ -48,7 +48,7 @@ const Publish = () => {
       );
       setData(response.data);
       setIsPictureSending(false);
-      console.log(response);
+      //  console.log(response);
     } catch (error) {
       console.log(error.response);
     }
