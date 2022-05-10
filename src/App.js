@@ -19,6 +19,11 @@ const stripePromise = loadStripe(
 function App() {
   const [token, setToken] = useState(Cookies.get("") || null);
   const [searchInput, setSearchInput] = useState("Rechercher des articles");
+  const [priceMin, setPriceMin] = useState(25);
+  const [priceMax, setPriceMax] = useState(100);
+  const [sort, setSort] = useState("price-asc");
+  const [data, setData] = useState("");
+  const [showResult, setShowResult] = useState("");
 
   const setUser = (token) => {
     if (token !== null) {
@@ -33,21 +38,30 @@ function App() {
     setToken(token);
     console.log(`mise a jour du state Token avec ${token}`);
   };
+
   return (
     <Router>
-      <Header token={token} setUser={setUser} />
-      <Link to="/">Go to Home</Link>
-      <Link to="/offer">Go to Offer</Link>
+      <Header
+        token={token}
+        setUser={setUser}
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+        priceMin={priceMin}
+        setPriceMin={setPriceMin}
+        priceMax={priceMax}
+        setPriceMax={setPriceMax}
+        sort={setSort}
+        data={data}
+        setData={setData}
+        showResult={showResult}
+        setShowResult={setShowResult}
+      />
+
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home searchInput={searchInput} setSearchInput={setSearchInput} />
-          }
-        />
+        <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup setUser={setUser} />} />
         {/* passage de la fonction -setUser- en props de Signup */}
-        <Route path="/signin" element={<Signin />} />
+        <Route path="/signin" element={<Signin setUser={setUser} />} />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/publish" element={<Publish />} />
         <Route

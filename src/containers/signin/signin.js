@@ -14,24 +14,24 @@ const Signin = ({ setUser }) => {
       event.preventDefault();
       //console.log("le bouton fonctionne");
       const data = { email: email, password: password };
-
+      //      console.log(data);
       const response = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/user/login",
         data
       );
-      if (response.data.token) {
+      console.log(response.data.token);
+      if (response.data.token !== null) {
         setUser(response.data.token);
         //  console.log("access granted!");
         navigate("/");
       }
     } catch (error) {
-      console.log("access refused");
+      console.log(error);
       setMessage("Paramêtres de connexion incorrect...");
     }
 
     // const token = Cookies.get("token");
-    // console.log(data);
-    // console.log(response.data.token);
+
     // console.log(response.status);
     // console.log(token);
   };

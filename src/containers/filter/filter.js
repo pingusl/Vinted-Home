@@ -2,14 +2,22 @@ import { useState } from "react";
 import magnifyingGlass from "../../img/loupe.svg";
 import axios from "axios";
 
-const Filter = ({ searchInput, setSearchInput }) => {
-  const [priceMin, setPriceMin] = useState(25);
-  const [priceMax, setPriceMax] = useState(100);
-  const [sort, setSort] = useState("price-asc");
+const Filter = ({
+  searchInput,
+  setSearchInput,
+  priceMin,
+  setPriceMin,
+  priceMax,
+  setPriceMax,
+  sort,
+  setSort,
+  data,
+  setData,
+  showResult,
+  setShowResult,
+}) => {
   const [skip, setSkip] = useState(null);
   const [limite, setLimite] = useState(10);
-  const [data, setData] = useState("");
-  const [showResult, setShowResult] = useState("");
 
   const handleSearch = async (event) => {
     //event.preventDefault();
