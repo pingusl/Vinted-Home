@@ -2,10 +2,9 @@ import { useState } from "react";
 import magnifyingGlass from "../../img/loupe.svg";
 import axios from "axios";
 
-const Filter = () => {
-  const [searchInput, setSearchInput] = useState("Rechercher des articles");
-  const [priceMin, setPriceMin] = useState(null);
-  const [priceMax, setPriceMax] = useState(null);
+const Filter = ({ searchInput, setSearchInput }) => {
+  const [priceMin, setPriceMin] = useState(25);
+  const [priceMax, setPriceMax] = useState(100);
   const [sort, setSort] = useState("price-asc");
   const [skip, setSkip] = useState(null);
   const [limite, setLimite] = useState(10);
@@ -21,22 +20,22 @@ const Filter = () => {
     // console.log(response.data.offers);
     // console.log(response.data.offers.length);
     setData(response.data);
-    console.log(data.offers);
-    data.offers.map((offer, index) => {
-      setShowResult(
-        <div className="offer" key={index}>
-          <div className="offer-details">
-            <span className="offer-article-details">{offer.product_name}</span>
-            <span className="article-price">{offer.product_price}&nbsp;€</span>
-            <span className="article-size"></span>
+    // console.log(data.offers);
+    // data.offers.map((offer, index) => {
+    //   setShowResult(
+    //     <div className="offer" key={index}>
+    //       <div className="offer-details">
+    //         <span className="offer-article-details">{offer.product_name}</span>
+    //         <span className="article-price">{offer.product_price}&nbsp;€</span>
+    //         <span className="article-size"></span>
 
-            <span className="offer-like"></span>
-          </div>
-          {/* {console.log(offer)} */}
-        </div>
-      );
-      return console.log(data.offers);
-    });
+    //         <span className="offer-like"></span>
+    //       </div>
+    //       {/* {console.log(offer)} */}
+    //     </div>
+    //   );
+    //   return console.log(data.offers);
+    // });
   };
 
   return (
@@ -78,18 +77,17 @@ const Filter = () => {
           <div className="filter">
             <select
               name=""
-              id=""
               className="sort"
               onChange={(event) => {
                 setSort(event.target.value);
               }}
             >
-              <option value="price-asc" selected>
+              <option value="price-asc" defaultValue>
                 min max
               </option>
               <option value="price-desc">max min</option>
             </select>
-            <input type="range" name="" id="" />
+            <input type="range" name="" />
             <input
               type="text"
               className="price"
