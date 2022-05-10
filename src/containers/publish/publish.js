@@ -5,7 +5,6 @@ import axios from "axios";
 
 const Publish = () => {
   const token = Cookies.get("userToken");
-  console.log(token);
 
   //----States offer----//
   const [title, setTitle] = useState("");
@@ -35,9 +34,7 @@ const Publish = () => {
     formData.append("price", price);
     formData.append("color", color);
     formData.append("picture", picture);
-    console.log("publish");
 
-    console.log(formData);
     try {
       const response = await axios.post(
         "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
@@ -52,11 +49,11 @@ const Publish = () => {
     }
   };
 
-  return token ? (
+  return !token ? (
     <Navigate to="/signin" />
   ) : (
     <div>
-      <h1>Page publish token={token}</h1>
+      <h1>Publier une annonce</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="text"

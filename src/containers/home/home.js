@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import bannerImg from "../../img/banner-hero.jpeg";
 import tornImg from "../../img/effet-déchiré.png";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./home.scss";
 
 function Home({

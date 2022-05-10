@@ -1,33 +1,41 @@
+//----Loading Module----//
+
 import { Link, useNavigate } from "react-router-dom";
-//import { useState } from "react";
-import logo from "../../logo.svg";
-import Filter from "../filter/filter";
 import Cookies from "js-cookie";
+
+//----Loading logo----//
+import logo from "../../logo.svg";
+
+//---Loading component----//
+import Filter from "../filter/filter";
+
+//----Loading scss file----//
 import "./header.scss";
+
+//----Looking for cookie userToken----//
 const token = Cookies.get("userToken");
 const removeToken = () => {
   Cookies.remove("userToken");
 };
+
+//----App.js State use----//
 const Header = ({
-  setToken,
-  setUser,
   searchInput,
   setSearchInput,
   priceMin,
   setPriceMin,
   priceMax,
   setPriceMax,
-  sort,
   setSort,
   data,
   setData,
-  dataFilter,
   setDataFilter,
   isLoading,
   setIsLoading,
 }) => {
   const navigate = useNavigate();
-  console.log(token);
+
+  //----Show the header with authentification button management (trigger switch by token)----//
   return (
     <header className="header">
       <span className="logo">
@@ -50,8 +58,8 @@ const Header = ({
 
       <span className="button-group">
         {
-          //Si il n'y a pas de token---affichage des boutons de connexion ou inscription
-          token === null ? (
+          //Without token---show connexion & inscription button
+          !token ? (
             <>
               <Link className="sign-bt" to="/signup">
                 <span>S'inscrire</span>
@@ -61,12 +69,11 @@ const Header = ({
               </Link>
             </>
           ) : (
-            //sinon affichage du bouton se déconnecter.
+            //With token---show deconnexion button
             <span
               className="sign-bt"
               onClick={() => {
                 removeToken();
-
                 navigate("/");
               }}
             >

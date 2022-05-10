@@ -24,13 +24,14 @@ const Filter = ({
         const response = await axios.get(
           `https://lereacteur-vinted-api.herokuapp.com/offers?title=${searchInput}&priceMin=${priceMin}&priceMax=${priceMax}&sort=${sort}&skip=${skip}&limit=${limite}`
         );
-        console.log(response.data);
-        setDataFilter(response.data);
+        //  console.log(response.data);
+        // setDataFilter(response.data); //BLOQUER A CAUSE DE L'ERREUR: setDataFilter is not a function!!! ///
         // setIsLoading(false);
       } catch (error) {
         console.log(error.message);
       }
     };
+
     handleSearch();
   }, [searchInput, priceMin, priceMax, sort, limite, skip]);
   return (

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 import axios from "axios";
+import "../checkoutform/checkoutform.scss";
 
 const CheckoutForm = () => {
   const stripe = useStripe();
@@ -22,7 +23,7 @@ const CheckoutForm = () => {
     const stripeToken = stripeResponse.token.id;
 
     //Requête auprès du back avec le token délivré par L'API
-    const response = await axios.post("http://localhost/pay", {
+    const response = await axios.post("http://localhost:3000/pay", {
       //placer l'adresse du back Héroku après avoir créé la route /pay
       stripeToken,
     });
@@ -36,10 +37,12 @@ const CheckoutForm = () => {
   return (
     <>
       {!completed ? (
-        <form onSubmit={handleSubmit}>
-          <CardElement />
-          <button type="submit">Valider</button>
-        </form>
+        <div className="input-card">
+          <form onSubmit={handleSubmit}>
+            <CardElement />
+            <button type="submit">Valider</button>
+          </form>
+        </div>
       ) : (
         <span>Paiement effectué !</span>
       )}
