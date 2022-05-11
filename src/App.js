@@ -1,9 +1,9 @@
 //----Load modules----//
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState } from "react";
-import Cookies from "cookies-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
+import Cookies from "cookies-js";
 
 //----Components----//
 import Header from "./components/header/header";
@@ -14,7 +14,8 @@ import Offer from "./pages/offer/offer";
 import Signup from "./pages/signup/signup";
 import Signin from "./pages/signin/signin";
 import Publish from "./pages/publish/publish";
-import CheckoutForm from "./containers/checkoutform/checkoutform";
+import Payment from "./pages/payment/payment";
+import CheckoutForm from "./components/checkoutform/checkoutform";
 
 //----Route de sécurité----//
 import NoMatch from "./pages/nomatch";
@@ -96,6 +97,7 @@ function App() {
         <Route path="/signin" element={<Signin setUser={setUser} />} />
         <Route path="/offer/:id" element={<Offer />} />
         <Route path="/publish" element={<Publish token={token} />} />
+        <Route path="/payment" element={<Payment token={token} />} />
         <Route
           path="/checkoutForm"
           element={

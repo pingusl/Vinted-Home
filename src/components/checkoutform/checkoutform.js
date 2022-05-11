@@ -19,7 +19,7 @@ const CheckoutForm = () => {
     });
     console.log(stripeResponse);
 
-    //Récupération du token délivé par l'API
+    //Récupération du token délivé par l'API a renvoyer au back
     const stripeToken = stripeResponse.token.id;
 
     //Requête auprès du back avec le token délivré par L'API
