@@ -5,17 +5,19 @@ import Cookies from "cookies-js";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
+//----Components----//
+import Header from "./components/header/header";
+
 //----Routes----//
-import Home from "./containers/home/home";
-import Offer from "./containers/offer/offer";
-import Header from "./containers/header/header";
-import Signup from "./containers/signup/signup";
-import Signin from "./containers/signin/signin";
-import Publish from "./containers/publish/publish";
+import Home from "./pages/home/home";
+import Offer from "./pages/offer/offer";
+import Signup from "./pages/signup/signup";
+import Signin from "./pages/signin/signin";
+import Publish from "./pages/publish/publish";
 import CheckoutForm from "./containers/checkoutform/checkoutform";
 
 //----Route de sécurité----//
-import NoMatch from "./containers/nomatch";
+import NoMatch from "./pages/nomatch";
 
 //----CSS impot----//
 import "./App.css";
