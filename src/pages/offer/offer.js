@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom"; //ok
 import axios from "axios";
 
+//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = "http://localhost:4000";
+//const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
+
 const Offer = () => {
   const { id } = useParams();
   //----Create states for manage data----//
@@ -11,9 +15,7 @@ const Offer = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offer/${id}`
-        );
+        const response = await axios.get(`${urlServer}/offer/${id}`);
         // console.log(response.data.offers[0]._id);
         setData(response.data);
         setIsLoading(false);

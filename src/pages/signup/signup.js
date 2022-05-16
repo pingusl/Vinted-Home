@@ -4,6 +4,10 @@ import axios from "axios";
 import Cookies from "cookies-js";
 import "./signup.scss";
 
+//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = "http://localhost:4000";
+//const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
+
 const Signup = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -25,14 +29,11 @@ const Signup = ({ setUser }) => {
 
       //console.log(data); //Sans stringify reponse serveur > erreur 409 > Response dans inspecteur Cet email existe déjà
       //console.log(JSON.stringify(data)); //Avec stringify reponse serveur > erreur 400
-      const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/signup",
-        data
-      );
+      const response = await axios.post(`${urlServer}/user/signup`, data);
       if (response.data) {
         //console.log("compte créé avec succès!");
         setUser(response.data.token);
-        Cookies.set("token", response.data.token);
+        Cookies.set("userToken", response.data.token);
 
         //----rediriger vers page principal----//
         navigate("/");

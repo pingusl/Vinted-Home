@@ -3,6 +3,10 @@ import { Navigate } from "react-router-dom";
 import Cookies from "cookies-js";
 import axios from "axios";
 
+//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = "http://localhost:4000";
+//const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
+
 const Publish = () => {
   const token = Cookies.get("userToken");
 
@@ -37,7 +41,7 @@ const Publish = () => {
 
     try {
       const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/offer/publish",
+        `${urlServer}/offer/publish`,
         formData,
         { headers: { authorization: "Bearer " + token } }
       );

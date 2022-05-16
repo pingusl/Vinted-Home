@@ -5,6 +5,10 @@ import axios from "axios";
 import { useEffect } from "react";
 import "./home.scss";
 
+//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = "http://localhost:4000";
+//const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
+
 function Home({
   token,
   setToken,
@@ -30,9 +34,7 @@ function Home({
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `https://lereacteur-vinted-api.herokuapp.com/offers`
-        );
+        const response = await axios.get(`${urlServer}/offers`);
         // console.log(response.data.offers[0]._id);
         // console.log(response.data.offers);
         setData(response.data);

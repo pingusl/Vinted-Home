@@ -3,6 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./signin.scss";
 
+//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = "http://localhost:4000";
+//const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
+
 const Signin = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -15,10 +19,7 @@ const Signin = ({ setUser }) => {
       //console.log("le bouton fonctionne");
       const data = { email: email, password: password };
       //      console.log(data);
-      const response = await axios.post(
-        "https://lereacteur-vinted-api.herokuapp.com/user/login",
-        data
-      );
+      const response = await axios.post(`${urlServer}/user/login`, data);
       console.log(response.data.token);
       if (response.data.token !== null) {
         setUser(response.data.token);
