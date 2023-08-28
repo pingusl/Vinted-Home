@@ -42,7 +42,7 @@ function App() {
 
   //----Loading State----//
   const [isLoading, setIsLoading] = useState(true);
-
+  //console.log(token);
   const setUser = (token) => {
     if (token !== null) {
       //Action de connexion
@@ -83,6 +83,7 @@ function App() {
           path="/"
           element={
             <Home
+              token={token}
               isLoading={isLoading}
               setIsLoading={setIsLoading}
               data={data}

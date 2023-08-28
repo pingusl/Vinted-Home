@@ -28,15 +28,17 @@ function Home({
   setIsLoading,
 }) {
   //----Create states for manage data----//
-
+  // console.log(token);
   // const [data, setData] = useState(); //To record the data
   const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${urlServer}/offers`);
+        const response = await axios.get(`${urlServer}/offers`, {
+          headers: { authorization: "Bearer " + token },
+        });
         // console.log(response.data.offers[0]._id);
-        // console.log(response.data.offers);
+        console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -77,31 +79,33 @@ function Home({
         <h2>Articles populaires</h2>
       </div>
       <section className="offers">
-        {data.offers.map((offer, index) => {
-          return (
-            <div className="offer" key={index}>
-              <Link to={`offer/${offer._id}`}>
-                <img
-                  className="offer-img"
-                  src={offer.product_image.secure_url}
-                  alt={offer._id}
-                />
-              </Link>
-              <div className="offer-details">
-                <span className="offer-article-details"></span>
-                <div className="article-price">
-                  {offer.product_price}&nbsp;€
+        {data.offers
+          ? data.offers.map((offer, index) => {
+              return (
+                <div className="offer" key={index}>
+                  <Link to={`offer/${offer._id}`}>
+                    <img
+                      className="offer-img"
+                      src={offer.product_image.secure_url}
+                      alt={offer._id}
+                    />
+                  </Link>
+                  <div className="offer-details">
+                    <span className="offer-article-details"></span>
+                    <div className="article-price">
+                      {offer.product_price}&nbsp;€
+                    </div>
+                    <div className="article-size"></div>
+                    <div className="article-brand">
+                      {offer.product_details[0].MARQUE}
+                    </div>
+                    <span className="offer-like"></span>
+                  </div>
+                  {/* {console.log(offer)} */}
                 </div>
-                <div className="article-size"></div>
-                <div className="article-brand">
-                  {offer.product_details[0].MARQUE}
-                </div>
-                <span className="offer-like"></span>
-              </div>
-              {/* {console.log(offer)} */}
-            </div>
-          );
-        })}
+              );
+            })
+          : null}
       </section>
     </div>
   );
