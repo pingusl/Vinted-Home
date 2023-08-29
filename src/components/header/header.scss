@@ -11,71 +11,59 @@
 .logo {
   flex: 1;
 }
+.search-img {
+  display: flex;
+  align-items: center;
+  width: 15px;
+  color: #999999;
+  padding-right: 3px;
+}
 .search {
   line-height: 1.5rem;
-  flex: 1;
+  //flex: 1;
   background-color: #f5f6f7;
   border-style: none;
   border-radius: 05px;
   justify-content: flex-start;
-  .search-form {
-    // line-height: inherit;
-    // display: flex;
-    // align-items: center;
-    // flex-direction: row;
 
-    .search-bar {
-      width: 45rem;
+  .search-bar {
+    width: 45rem;
+    display: flex;
+
+    justify-content: space-between;
+
+    .search-input {
       display: flex;
-      justify-content: space-between;
-      .search-img {
-        display: flex;
-        align-items: center;
-        width: 15px;
-        color: #999999;
-        padding-right: 3px;
-      }
-      .search-input {
-        width: 100%;
-        // font-family: inherit;
-        font-size: medium;
-        color: #535353;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        // padding: 1px 2px;
-        -webkit-font-smoothing: antialiased;
-        // -webkit-appearance: none;
-        // cursor: pointer;
-      }
-      .search-range {
-        width: 100%;
-        flex-direction: row;
-        // font-family: inherit;
-        font-size: medium;
-        color: #535353;
-        border: none;
-        outline: none;
-        background-color: transparent;
-        // padding: 1px 2px;
-        -webkit-font-smoothing: antialiased;
-        // -webkit-appearance: none;
-        // cursor: pointer;
-      }
-      .clear-bt {
-        height: 100%;
-        font-size: large;
-        border-style: none;
-        padding-left: 10px;
-        padding-right: 10px;
+      //width: 100%;
+      font-family: inherit;
+      font-size: medium;
+      color: #535353;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      // padding: 1px 2px;
+      -webkit-font-smoothing: antialiased;
+      // -webkit-appearance: none;
+      // cursor: pointer;
+    }
+    .search-range {
+      display: flex;
+      flex: 1;
+      // font-family: inherit;
+      font-size: medium;
+      color: #535353;
+      border: none;
+      outline: none;
+      background-color: red;
+      // padding: 1px 2px;
+      -webkit-font-smoothing: antialiased;
+      // -webkit-appearance: none;
+      // cursor: pointer;
+      .label-range {
+        width: 2rem;
       }
     }
-    .search-result {
-      display: block;
-      margin-top: 8px;
-      width: 100%;
-      position: absolute;
-    }
+    //  }
   }
 }
 

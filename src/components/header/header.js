@@ -1,6 +1,7 @@
 //----Loading Module----//
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+
 import Cookies from "js-cookie";
 import PriceRange from "../priceRange/priceRange";
 
@@ -8,7 +9,7 @@ import PriceRange from "../priceRange/priceRange";
 import logo from "../../logo.svg";
 
 //---Loading picture----//
-import magnifyingGlass from "../../img/loupe.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 //----Loading scss file----//
 import "./header.scss";
@@ -20,53 +21,70 @@ const removeToken = () => {
 };
 
 //----App.js State use----//
-const Header = ({ searchInput, setSearchInput, setFetchRangeValues }) => {
+const Header = ({
+  sortPrice,
+  setSortPrice,
+  setSearchInput,
+  setFetchRangeValues,
+}) => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   //----Show the header with authentification button management (trigger switch by token)----//
   return (
     <header className="header">
-      <span className="logo">
+      <div
+        className="logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
         <img src={logo} className="logo-img" alt="logo-vinted" />
-      </span>
+      </div>
 
-      <span className="search">
-        <form className="search-form" id="#search-bar">
-          <div className="search-bar">
-            <div className="search-img">
-              <img className="search-img" src={magnifyingGlass} alt="search" />
-            </div>
-            <div className="search-input">
-              <input
-                className="search-input"
-                placeholder=""
-                type="text"
-                onClick={(event) => {
-                  setSearchInput("");
-                }}
-                onChange={(event) => {
-                  setSearchInput(event.target.value);
-                }}
-                value={searchInput}
-              />
-            </div>
-          </div>
-          <div className="search-range">
-            <div style={{ marginRight: 10 }}>Prix entre : </div>
-
-            <PriceRange setFetchRangeValues={setFetchRangeValues} />
-          </div>
-          <div className="search-result">
+      <div className="search-container">
+        <input
+          type="text"
+          className="search-input"
+          placeholder="Recherche des articles"
+          onChange={(event) => setSearchInput(event.target.value)}
+        />
+        <FontAwesomeIcon icon="search" className="search-input-icon" />
+        {location.pathname === "/" ? (
+          <div>
             <div
-              className={
-                searchInput !== ""
-                  ? "search-result-componant show"
-                  : "search-result-componant hide"
-              }
-            ></div>
+              style={{
+                marginTop: 25,
+                fontSize: "12px",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <span style={{ marginRight: 10 }}>Trier par prix : </span>
+              <span className="checkbox">
+                <input
+                  type="checkbox"
+                  checked={sortPrice}
+                  onChange={() => {}}
+                  name="price"
+                />
+                <div
+                  className="wrapper"
+                  onClick={() => {
+                    setSortPrice(!sortPrice);
+                  }}
+                >
+                  <div className="knob">
+                    <span>{sortPrice ? "⇣" : "⇡"}</span>
+                  </div>
+                </div>
+              </span>
+              <span style={{ marginRight: 10 }}>Prix entre : </span>
+              <PriceRange setFetchRangeValues={setFetchRangeValues} />
+            </div>
           </div>
-        </form>
-      </span>
+        ) : null}
+      </div>
 
       <span className="button-group">
         {
