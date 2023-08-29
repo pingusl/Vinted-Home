@@ -32,14 +32,13 @@ const Header = ({
 
   //----Show the header with authentification button management (trigger switch by token)----//
   return (
-    <header className="header">
+    <header className="header-container">
       <div
-        className="logo"
         onClick={() => {
           navigate("/");
         }}
       >
-        <img src={logo} className="logo-img" alt="logo-vinted" />
+        <img src={logo} className="header-logo" alt="logo-vinted" />
       </div>
 
       <div className="search-container">
