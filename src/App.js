@@ -61,10 +61,7 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${urlServer}/offers?title=${searchInput}`,
-          {
-            headers: { authorization: "Bearer " + token },
-          }
+          `${urlServer}/offers?title=${searchInput}`
         );
         // console.log(response.data.offers[0]._id);
         console.table(response.data);
@@ -75,12 +72,13 @@ function App() {
       }
     };
     fetchData();
-  }, []);
+  }, [searchInput]);
   return (
     <Router>
       <Header
         setUser={setUser}
         token={token}
+        setSearchInput={setSearchInput}
         // setFetchRangeValues={setFetchRangeValues}
         // fetchRangeValues={fetchRangeValues}
         // sortPrice={sortPrice}

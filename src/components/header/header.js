@@ -27,11 +27,6 @@ const Header = ({
   priceMax,
   setPriceMax,
   setSort,
-  data,
-  setData,
-  setDataFilter,
-  isLoading,
-  setIsLoading,
 }) => {
   const navigate = useNavigate();
 
@@ -61,11 +56,6 @@ const Header = ({
                 }}
                 value={searchInput}
               />
-            </div>
-            <div className="search-clear">
-              <button className="clear-bt" type="button">
-                X
-              </button>
             </div>
           </div>
           <div className="search-range"></div>
