@@ -4,7 +4,8 @@ import { useState } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import Cookies from "cookies-js";
-
+import axios from "axios";
+import { useEffect } from "react";
 //----Components----//
 import Header from "./components/header/header";
 
@@ -27,6 +28,7 @@ import "./App.css";
 const stripePromise = loadStripe(
   "pk_test_51KxteNK5InFIuhoyx5KbGpsHB85nj5rUB33Dp2vMZrIVWIEskzu0KCc2PgGI20qEq26NKMLFLkUExU13mJ9Ithfx00chZDzBKh"
 );
+const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
 
 function App() {
   //---- Authorization States----//
@@ -44,19 +46,36 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   //console.log(token);
   const setUser = (token) => {
-    if (token !== null) {
+    if (token) {
       //Action de connexion
-      console.log("création cookie");
       setToken(token);
       Cookies.set("userToken", token, { expire: 7 });
     } else {
       //Action de déconnexion
       setToken(null);
-      console.log("suppression cookie");
       Cookies.removeItem("userToken");
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `${urlServer}/offers?title=${searchInput}`,
+          {
+            headers: { authorization: "Bearer " + token },
+          }
+        );
+        // console.log(response.data.offers[0]._id);
+        console.table(response.data);
+        setData(response.data);
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   return (
     <Router>
       <Header
@@ -79,20 +98,7 @@ function App() {
       />
 
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              token={token}
-              isLoading={isLoading}
-              setIsLoading={setIsLoading}
-              data={data}
-              setData={setData}
-              dataFilter={dataFilter}
-              setDatafilter={setDataFilter}
-            />
-          }
-        />
+        <Route path="/" element={<Home isLoading={isLoading} data={data} />} />
         <Route path="/signup" element={<Signup setUser={setUser} />} />
         {/* passage de la fonction -setUser- en props de Signup */}
         <Route path="/signin" element={<Signin setUser={setUser} />} />

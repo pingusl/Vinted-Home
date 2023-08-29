@@ -1,55 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
 import bannerImg from "../../img/banner-hero.jpeg";
 import tornImg from "../../img/effet-déchiré.png";
-import axios from "axios";
-import { useEffect } from "react";
+import { RotatingLines } from "react-loader-spinner";
+
 import "./home.scss";
 
-const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
-//const urlServer = "http://localhost:4000";
-//const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
-
-function Home({
-  token,
-  setToken,
-  searchInput,
-  setSearchInput,
-  priceMin,
-  setPriceMin,
-  priceMax,
-  setPriceMax,
-  sort,
-  setSort,
-  data,
-  setData,
-  dataFilter,
-  setDataFilter,
-  isLoading,
-  setIsLoading,
-}) {
+function Home({ data, isLoading }) {
   //----Create states for manage data----//
   // console.log(token);
   // const [data, setData] = useState(); //To record the data
   const navigate = useNavigate();
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${urlServer}/offers`, {
-          headers: { authorization: "Bearer " + token },
-        });
-        // console.log(response.data.offers[0]._id);
-        console.table(response.data);
-        setData(response.data);
-        setIsLoading(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, []);
+
   // console.log(isLoading);
   return isLoading === true ? (
-    <h1>En cours de chargement 🥁</h1>
+    <RotatingLines
+      strokeColor="green"
+      strokeWidth="5"
+      animationDuration="0.75"
+      width="96"
+      visible={true}
+    />
   ) : (
     <div className="home-container">
       <div className="banner">
