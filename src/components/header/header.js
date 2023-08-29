@@ -2,6 +2,7 @@
 
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import PriceRange from "../priceRange/priceRange";
 
 //----Loading logo----//
 import logo from "../../logo.svg";
@@ -19,15 +20,7 @@ const removeToken = () => {
 };
 
 //----App.js State use----//
-const Header = ({
-  searchInput,
-  setSearchInput,
-  priceMin,
-  setPriceMin,
-  priceMax,
-  setPriceMax,
-  setSort,
-}) => {
+const Header = ({ searchInput, setSearchInput, setFetchRangeValues }) => {
   const navigate = useNavigate();
 
   //----Show the header with authentification button management (trigger switch by token)----//
@@ -46,19 +39,23 @@ const Header = ({
             <div className="search-input">
               <input
                 className="search-input"
+                placeholder=""
                 type="text"
                 onClick={(event) => {
                   setSearchInput("");
                 }}
                 onChange={(event) => {
                   setSearchInput(event.target.value);
-                  // handleSearch();
                 }}
                 value={searchInput}
               />
             </div>
           </div>
-          <div className="search-range"></div>
+          <div className="search-range">
+            <div style={{ marginRight: 10 }}>Prix entre : </div>
+
+            <PriceRange setFetchRangeValues={setFetchRangeValues} />
+          </div>
           <div className="search-result">
             <div
               className={
@@ -67,39 +64,6 @@ const Header = ({
                   : "search-result-componant hide"
               }
             ></div>
-            <div className="filter">
-              <select
-                name=""
-                className="sort"
-                onChange={(event) => {
-                  setSort(event.target.value);
-                }}
-              >
-                <option value="price-asc" defaultValue>
-                  min max
-                </option>
-                <option value="price-desc">max min</option>
-              </select>
-
-              <input
-                type="text"
-                className="price"
-                placeholder=" prix mini"
-                onChange={(event) => {
-                  setPriceMin(event.target.value);
-                }}
-                value={priceMin}
-              />
-              <input
-                type="text"
-                className="price"
-                placeholder=" prix maxi"
-                onChange={(event) => {
-                  setPriceMax(event.target.value);
-                }}
-                value={priceMax}
-              />
-            </div>
           </div>
         </form>
       </span>

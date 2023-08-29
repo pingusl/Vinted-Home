@@ -36,11 +36,9 @@ function App() {
 
   //----Filter Sates----//
   const [searchInput, setSearchInput] = useState("");
-  const [priceMin, setPriceMin] = useState(25);
-  const [priceMax, setPriceMax] = useState(100);
+  const [fetchRangeValues, setFetchRangeValues] = useState([0, 10000]);
   const [sort, setSort] = useState("price-asc");
   const [data, setData] = useState("");
-  const [dataFilter, setDataFilter] = useState("");
 
   //----Loading State----//
   const [isLoading, setIsLoading] = useState(true);
@@ -61,9 +59,8 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${urlServer}/offers?title=${searchInput}`
+          `${urlServer}/offers?priceMin=${fetchRangeValues[0]}&priceMax=${fetchRangeValues[1]}&title=${searchInput}`
         );
-        // console.log(response.data.offers[0]._id);
         console.table(response.data);
         setData(response.data);
         setIsLoading(false);
@@ -72,14 +69,14 @@ function App() {
       }
     };
     fetchData();
-  }, [searchInput]);
+  }, [searchInput, fetchRangeValues]);
   return (
     <Router>
       <Header
         setUser={setUser}
         token={token}
         setSearchInput={setSearchInput}
-        // setFetchRangeValues={setFetchRangeValues}
+        setFetchRangeValues={setFetchRangeValues}
         // fetchRangeValues={fetchRangeValues}
         // sortPrice={sortPrice}
         // setSortPrice={setSortPrice}
