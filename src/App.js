@@ -35,7 +35,7 @@ function App() {
   const [token, setToken] = useState(Cookies.get("userToken") || null);
 
   //----Filter Sates----//
-  const [searchInput, setSearchInput] = useState("Rechercher des articles");
+  const [searchInput, setSearchInput] = useState("");
   const [priceMin, setPriceMin] = useState(25);
   const [priceMax, setPriceMax] = useState(100);
   const [sort, setSort] = useState("price-asc");
@@ -79,22 +79,12 @@ function App() {
   return (
     <Router>
       <Header
-        token={token}
-        setToken={setToken}
         setUser={setUser}
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        priceMin={priceMin}
-        setPriceMin={setPriceMin}
-        priceMax={priceMax}
-        setPriceMax={setPriceMax}
-        sort={setSort}
-        data={data}
-        setData={setData}
-        dataFilter={dataFilter}
-        setDataFilter={setDataFilter}
-        isLoading={isLoading}
-        setisLoading={setIsLoading}
+        token={token}
+        // setFetchRangeValues={setFetchRangeValues}
+        // fetchRangeValues={fetchRangeValues}
+        // sortPrice={sortPrice}
+        // setSortPrice={setSortPrice}
       />
 
       <Routes>

@@ -6,8 +6,8 @@ import Cookies from "js-cookie";
 //----Loading logo----//
 import logo from "../../logo.svg";
 
-//---Loading component----//
-import Filter from "../filter/filter";
+//---Loading picture----//
+import magnifyingGlass from "../../img/loupe.svg";
 
 //----Loading scss file----//
 import "./header.scss";
@@ -41,20 +41,78 @@ const Header = ({
       <span className="logo">
         <img src={logo} className="logo-img" alt="logo-vinted" />
       </span>
-      <Filter
-        searchInput={searchInput}
-        setSearchInput={setSearchInput}
-        priceMin={priceMin}
-        setPriceMin={setPriceMin}
-        priceMax={priceMax}
-        setPriceMax={setPriceMax}
-        sort={setSort}
-        data={data}
-        setData={setData}
-        dataFilter={setDataFilter}
-        IsLoading={isLoading}
-        setIsLoading={setIsLoading}
-      />
+
+      <span className="search">
+        <form className="search-form" id="#search-bar">
+          <div className="search-bar">
+            <div className="search-img">
+              <img className="search-img" src={magnifyingGlass} alt="search" />
+            </div>
+            <div className="search-input">
+              <input
+                className="search-input"
+                type="text"
+                onClick={(event) => {
+                  setSearchInput("");
+                }}
+                onChange={(event) => {
+                  setSearchInput(event.target.value);
+                  // handleSearch();
+                }}
+                value={searchInput}
+              />
+            </div>
+            <div className="search-clear">
+              <button className="clear-bt" type="button">
+                X
+              </button>
+            </div>
+          </div>
+          <div className="search-range"></div>
+          <div className="search-result">
+            <div
+              className={
+                searchInput !== ""
+                  ? "search-result-componant show"
+                  : "search-result-componant hide"
+              }
+            ></div>
+            <div className="filter">
+              <select
+                name=""
+                className="sort"
+                onChange={(event) => {
+                  setSort(event.target.value);
+                }}
+              >
+                <option value="price-asc" defaultValue>
+                  min max
+                </option>
+                <option value="price-desc">max min</option>
+              </select>
+
+              <input
+                type="text"
+                className="price"
+                placeholder=" prix mini"
+                onChange={(event) => {
+                  setPriceMin(event.target.value);
+                }}
+                value={priceMin}
+              />
+              <input
+                type="text"
+                className="price"
+                placeholder=" prix maxi"
+                onChange={(event) => {
+                  setPriceMax(event.target.value);
+                }}
+                value={priceMax}
+              />
+            </div>
+          </div>
+        </form>
+      </span>
 
       <span className="button-group">
         {
