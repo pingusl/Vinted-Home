@@ -5,8 +5,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import "./home.scss";
 
-//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
-const urlServer = "http://localhost:4000";
+const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
+//const urlServer = "http://localhost:4000";
 //const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
 
 function Home({
@@ -38,7 +38,7 @@ function Home({
           headers: { authorization: "Bearer " + token },
         });
         // console.log(response.data.offers[0]._id);
-        console.log(response.data);
+        console.table(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -101,7 +101,6 @@ function Home({
                     </div>
                     <span className="offer-like"></span>
                   </div>
-                  {/* {console.log(offer)} */}
                 </div>
               );
             })

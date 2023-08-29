@@ -52,8 +52,8 @@
 .offers {
   display: flex;
   width: inherit;
-  flex-wrap: nowrap;
-  overflow-x: hidden;
+  flex-wrap: wrap;
+  // overflow-x: hidden;
   .offer-img {
     width: 20vw;
     height: 300px;

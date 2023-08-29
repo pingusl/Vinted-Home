@@ -47,14 +47,14 @@ function App() {
     if (token !== null) {
       //Action de connexion
       console.log("création cookie");
+      setToken(token);
       Cookies.set("userToken", token, { expire: 7 });
     } else {
       //Action de déconnexion
+      setToken(null);
       console.log("suppression cookie");
       Cookies.removeItem("userToken");
     }
-    setToken(token);
-    console.log(`mise a jour du state Token avec ${token}`);
   };
 
   return (
