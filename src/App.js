@@ -37,7 +37,7 @@ function App() {
   //----Filter Sates----//
   const [searchInput, setSearchInput] = useState("");
   const [fetchRangeValues, setFetchRangeValues] = useState([0, 10000]);
-  const [sort, setSort] = useState("price-asc");
+  const [sortPrice, setSortPrice] = useState(false);
   const [data, setData] = useState("");
 
   //----Loading State----//
@@ -77,9 +77,9 @@ function App() {
         token={token}
         setSearchInput={setSearchInput}
         setFetchRangeValues={setFetchRangeValues}
-        // fetchRangeValues={fetchRangeValues}
-        // sortPrice={sortPrice}
-        // setSortPrice={setSortPrice}
+        fetchRangeValues={fetchRangeValues}
+        sortPrice={sortPrice}
+        setSortPrice={setSortPrice}
       />
 
       <Routes>
