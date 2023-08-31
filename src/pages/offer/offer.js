@@ -3,12 +3,15 @@ import { useParams, useNavigate } from "react-router-dom"; //ok
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
 
+import "../../assets/styles/offers.css";
+
 const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
 //const urlServer = "http://localhost:4000";
 //const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
 
 const Offer = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   //----Create states for manage data----//
   const [isLoading, setIsLoading] = useState(true); //To be sur data will be loading
   const [data, setData] = useState(); //To record the data
@@ -17,7 +20,7 @@ const Offer = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`${urlServer}/offer/${id}`);
-        // console.log(response.data.offers[0]._id);
+        console.log(response.data);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -29,27 +32,93 @@ const Offer = () => {
 
   // console.log(params.Offer_id);
   return isLoading ? (
-    <div>en cours de chargement 🥁</div>
+    <RotatingLines
+      strokeColor="green"
+      strokeWidth="5"
+      animationDuration="0.75"
+      width="96"
+      visible={true}
+    />
   ) : (
-    <div>
-      <div className="offer-container">Offre: {id}</div>
-      <div>
-        {
-          //Liste des details du produit
-          data.product_details.map((item, index) => {
-            //Met dans le tableau keys la clef et son contenu
-            const keys = Object.keys(item);
-            return (
-              <div key={index}>
-                {/* {Affiche le contenu du tableau keys créé par Object.keys} */}
-                {keys[0]}:{item[keys[0]]}
-                {/*console.log(item)*/}
-              </div>
-            );
-          })
-        }
+    <div className="offer-body">
+      <div className="offer-container">
+        <div className="offer-pictures">
+          {data.product_pictures.length === 0 ? (
+            <img
+              className="offer-picture"
+              src={data.product_image.secure_url}
+              alt={data.product_name}
+            />
+          ) : (
+            <img
+              className="offer-picture"
+              src={data.product_pictures[0].secure_url}
+              alt={data.product_name}
+            />
+          )}
+        </div>
+        <div className="offer-infos" style={{}}>
+          <div>
+            <span className="offer-price">{data.product_price} €</span>
+
+            <ul className="offer-list">
+              {data.product_details.map((elem, index) => {
+                const keys = Object.keys(elem);
+                return (
+                  <li key={index} className="">
+                    <span>{keys[0]}</span>
+                    <span>{elem[keys[0]]}</span>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <div className="divider" />
+
+          <div className="offer-content">
+            <p className="name">{data.product_name}</p>
+            <p className="description">{data.product_description}</p>
+
+            <div
+              onClick={() => alert("Go to user profile !")}
+              className="offer-avatar-username"
+            >
+              {data.owner && data.owner.account.avatar && (
+                <img
+                  alt={data.product_name}
+                  src={data.owner.account.avatar.secure_url}
+                />
+              )}
+              <span>{data.owner && data.owner.account.username}</span>
+            </div>
+          </div>
+
+          <button
+            onClick={() => {
+              const price = data.product_price;
+              const protectionFees = (price / 10).toFixed(2);
+              const shippingFees = (protectionFees * 2).toFixed(2);
+              const total =
+                Number(price) + Number(protectionFees) + Number(shippingFees);
+
+              navigate("/payment", {
+                state: {
+                  productName: data.product_name,
+                  totalPrice: total,
+                  protectionFees: protectionFees,
+                  shippingFees: shippingFees,
+                  price: data.product_price,
+                },
+              });
+            }}
+          >
+            Acheter
+          </button>
+        </div>
       </div>
     </div>
   );
 };
+
 export default Offer;
