@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom"; //ok
+import { useParams, useNavigate } from "react-router-dom"; //ok
 import axios from "axios";
+import { RotatingLines } from "react-loader-spinner";
 
-//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
-const urlServer = "http://localhost:4000";
+const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
+//const urlServer = "http://localhost:4000";
 //const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
 
 const Offer = () => {
