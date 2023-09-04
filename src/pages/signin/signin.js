@@ -15,7 +15,7 @@ const Signin = ({ setUser }) => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const objectRequest = async (event) => {
+  const handleSubmit = async (event) => {
     try {
       event.preventDefault();
       //console.log("le bouton fonctionne");
@@ -42,8 +42,8 @@ const Signin = ({ setUser }) => {
     }
   };
   return (
-    <div className="signin-container">
-      <form className="signin-form" id="#log-in-form" onSubmit={objectRequest}>
+    <div className="sign-container">
+      <form className="sign-form" id="#log-in-form" onSubmit={handleSubmit}>
         <h1>Se connecter</h1>
 
         <input
@@ -62,7 +62,7 @@ const Signin = ({ setUser }) => {
           }}
           value={password}
         />
-        <span className="signup-login-error-message">{errorMessage}</span>
+        <span className="sign-login-error-message">{errorMessage}</span>
         {isLoading ? (
           <RotatingLines
             className="home-loader"
@@ -79,7 +79,7 @@ const Signin = ({ setUser }) => {
         )}
 
         <Link to="/signup">
-          <p className="signup-text">Pas encore de compte? Inscris-toi!</p>
+          <p className="sign-text">Pas encore de compte? Inscris-toi!</p>
         </Link>
       </form>
     </div>
