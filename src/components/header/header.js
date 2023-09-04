@@ -15,13 +15,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./header.scss";
 
 //----Looking for cookie userToken----//
-const token = Cookies.get("userToken");
+//const token = Cookies.get("userToken");
+
 const removeToken = () => {
   Cookies.remove("userToken");
 };
 
 //----App.js State use----//
 const Header = ({
+  token,
+  setToken,
   sortPrice,
   setSortPrice,
   setSearchInput,
@@ -103,6 +106,7 @@ const Header = ({
               className="sign-bt"
               onClick={() => {
                 removeToken();
+                setToken(null);
                 navigate("/");
               }}
             >

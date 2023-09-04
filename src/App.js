@@ -74,6 +74,7 @@ function App() {
       <Header
         setUser={setUser}
         token={token}
+        setToken={setToken}
         setSearchInput={setSearchInput}
         setFetchRangeValues={setFetchRangeValues}
         fetchRangeValues={fetchRangeValues}
