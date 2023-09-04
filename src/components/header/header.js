@@ -3,7 +3,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 import Cookies from "js-cookie";
-import PriceRange from "../priceRange/priceRange";
+import PriceRange from "../priceRange";
 
 //----Loading logo----//
 import logo from "../../logo.svg";
