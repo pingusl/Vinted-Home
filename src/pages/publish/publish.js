@@ -1,15 +1,12 @@
 import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import Cookies from "cookies-js";
+
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
-const urlServer = "http://localhost:4000";
-//const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
+const urlServer = process.env.REACT_APP_BASE_URL;
 
-const Publish = () => {
-  const token = Cookies.get("userToken");
-
+const Publish = (token) => {
   //----States offer----//
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -19,6 +16,7 @@ const Publish = () => {
   const [brand, setBrand] = useState("");
   const [size, setSize] = useState("");
   const [color, setColor] = useState("");
+  const [acceptedExchange, setAcceptedExchange] = useState(false);
   const [picture, setPicture] = useState(null);
   const [isPictureSending, setIsPictureSending] = useState(false); //Pour la gestion de l'affichage de l'image en upload
   const [data, setData] = useState(null); //Pour la gestion de l'affichage de l'image en upload
@@ -57,73 +55,156 @@ const Publish = () => {
     <Navigate to="/signin" />
   ) : (
     <div>
-      <h1>Publier une annonce</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Titre"
-          onChange={(event) => {
-            setTitle(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="description"
-          onChange={(event) => {
-            setDescription(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="prix"
-          onChange={(event) => {
-            setPrice(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="condition"
-          onChange={(event) => {
-            setCondition(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="ville"
-          onChange={(event) => {
-            setCity(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="marque"
-          onChange={(event) => {
-            setBrand(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="taille"
-          onChange={(event) => {
-            setSize(event.target.value);
-          }}
-        />
-        <input
-          type="text"
-          placeholder="couleur"
-          onChange={(event) => {
-            setColor(event.target.value);
-          }}
-        />
-        <input
-          type="file"
-          placeholder="photo"
-          onChange={(event) => {
-            setPicture(event.target.files[0]);
-          }}
-        />
-        <input type="submit" />
-      </form>
+      <div className="publish-container">
+        <h1>Publier une annonce</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="file"
+            placeholder="photo"
+            onChange={(event) => {
+              setPicture(event.target.files[0]);
+            }}
+          />
+          <div className="text-input-section">
+            <div className="text-input">
+              <h4>Titre</h4>
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value={title}
+                placeholder="ex: Chemise Sézane verte"
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setTitle(value);
+                }}
+              />
+            </div>
+            <div className="text-input">
+              <h4>Décris ton article</h4>
+              <textarea
+                name="description"
+                id="description"
+                rows="5"
+                value={description}
+                placeholder="ex: porté quelquefois, taille correctement"
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setDescription(value);
+                }}
+              ></textarea>
+            </div>
+          </div>
+          <div className="text-input-section">
+            <div className="text-input">
+              <h4>Marque</h4>
+              <input
+                type="text"
+                id="selectedBrand"
+                name="selectedBrand"
+                placeholder="ex: Zara"
+                value={brand}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setBrand(value);
+                }}
+              />
+            </div>
+            <div className="text-input">
+              <h4>Taille</h4>
+              <input
+                type="text"
+                id="selectedSize"
+                name="selectedSize"
+                placeholder="ex: L / 40 / 12"
+                value={size}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setSize(value);
+                }}
+              />
+            </div>
+            <div className="text-input">
+              <h4>Couleur</h4>
+              <input
+                type="text"
+                id="color"
+                name="color"
+                placeholder="ex: Fushia"
+                value={color}
+                onChange={(event) => {
+                  const value = event.target.value;
+                  setColor(value);
+                }}
+              />
+            </div>
+            <div className="text-input">
+              <h4>Etat</h4>
+              <input
+                name="wearRate"
+                id="wearRate"
+                placeholder="Neuf avec étiquette"
+                value={condition}
+                onChange={(event) => setCondition(event.target.value)}
+              />
+            </div>
+            <div className="text-input">
+              <h4>Lieu</h4>
+              <input
+                name="city"
+                id="city"
+                placeholder="ex: Paris"
+                value={city}
+                onChange={(event) => setCity(event.target.value)}
+              />
+            </div>
+          </div>
+
+          <div className="text-input-section">
+            <div className="text-input">
+              <h4>Prix</h4>
+              <div className="checkbox-section">
+                <input
+                  type="text"
+                  id="price"
+                  name="price"
+                  placeholder="0,00 €"
+                  value={price}
+                  onChange={(event) => {
+                    const value = event.target.value;
+                    setPrice(value);
+                  }}
+                />
+                <div className="checkbox-input">
+                  {acceptedExchange ? (
+                    <label
+                      htmlFor="exchange"
+                      className="checkbox-design-checked"
+                    >
+                      <FontAwesomeIcon icon="check" size="xs" color="white" />
+                    </label>
+                  ) : (
+                    <label
+                      htmlFor="exchange"
+                      className="checkbox-design"
+                    ></label>
+                  )}
+                  <input
+                    type="checkbox"
+                    name="exchange"
+                    id="exchange"
+                    value={acceptedExchange}
+                    onChange={() => setAcceptedExchange(!acceptedExchange)}
+                  />
+                  <span>Je suis intéressé(e) par les échanges</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <input type="submit" />
+        </form>
+      </div>
+
       {isPictureSending === true ? (
         <div>Image en chargement</div>
       ) : (
