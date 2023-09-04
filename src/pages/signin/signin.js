@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
-import "./signin.scss";
 
 const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
 //const urlServer = "http://localhost:4000";

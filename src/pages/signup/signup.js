@@ -2,10 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import Cookies from "cookies-js";
-import "./signup.scss";
 
-//const urlserver="https://lereacteur-vinted-api.herokuapp.com";
-const urlServer = "http://localhost:4000";
+const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
+//const urlServer = "http://localhost:4000";
 //const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
 
 const Signup = ({ setUser }) => {
@@ -13,7 +12,7 @@ const Signup = ({ setUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [newsletter, setNewsletter] = useState(false);
-  const [message, setMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const objectRequest = async (event) => {
@@ -46,14 +45,14 @@ const Signup = ({ setUser }) => {
 
       if (error.response.status === 409) {
         //  console.log("le mail est déjà pris");
-        setMessage("Cet email à déjà un compte !");
+        setErrorMessage("Cet email à déjà un compte !");
       }
     }
   };
 
   return (
-    <div className="signup-container">
-      <form className="form-contact" id="#contactForm" onSubmit={objectRequest}>
+    <div className="sign-container">
+      <form className="sign-form" id="#contactForm" onSubmit={objectRequest}>
         <h1>S'inscrire</h1>
         <input
           type="text"
@@ -95,7 +94,7 @@ const Signup = ({ setUser }) => {
         <button className="green-bt" type="submit">
           S'inscrire
         </button>
-        <p className="error-message">{message}</p>
+        <span className="sign-login-error-message">{errorMessage}</span>
         <Link to="/signin">
           <p className="signup-text">Tu as déjà un compte? Connecte-toi!</p>
         </Link>

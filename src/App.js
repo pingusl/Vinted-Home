@@ -25,10 +25,9 @@ import NoMatch from "./pages/nomatch";
 import "./App.css";
 
 //----Clef public stripe----//
-const stripePromise = loadStripe(
-  "pk_test_51KxteNK5InFIuhoyx5KbGpsHB85nj5rUB33Dp2vMZrIVWIEskzu0KCc2PgGI20qEq26NKMLFLkUExU13mJ9Ithfx00chZDzBKh"
-);
-const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_KEY);
+const urlServer = process.env.REACT_APP_BASE_URL;
+console.log(`urlServer: ${process.env.REACT_APP_BASE_URL}`);
 
 function App() {
   //---- Authorization States----//
