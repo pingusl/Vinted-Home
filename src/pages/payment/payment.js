@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import "../../assets/styles/payment.css";
-import CheckoutForm from "../../components/checkoutForm";
+import CheckoutForm from "../../components/checkoutform";
 import ProductSummary from "../../components/productSummary";
 
 const Payment = () => {
