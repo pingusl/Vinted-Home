@@ -16,7 +16,7 @@ import Signup from "./pages/signup/signup";
 import Signin from "./pages/signin/signin";
 import Publish from "./pages/publish/publish";
 import Payment from "./pages/payment/payment";
-import CheckoutForm from "./components/checkoutform/checkoutform";
+import CheckoutForm from "./components/checkoutForm";
 
 //----Route de sécurité----//
 import NoMatch from "./pages/nomatch";
