@@ -20,7 +20,7 @@ const Publish = (token) => {
   const [picture, setPicture] = useState(null);
   const [isPictureSending, setIsPictureSending] = useState(false); //Pour la gestion de l'affichage de l'image en upload
   const [data, setData] = useState(null); //Pour la gestion de l'affichage de l'image en upload
-
+  const [file, setFile] = useState({});
   //---OnClick function----//
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ const Publish = (token) => {
     formData.append("size", size);
     formData.append("price", price);
     formData.append("color", color);
-    formData.append("picture", picture);
+    formData.append("picture", file);
 
     try {
       const response = await axios.post(
@@ -58,13 +58,39 @@ const Publish = (token) => {
       <div className="publish-container">
         <h1>Publier une annonce</h1>
         <form onSubmit={handleSubmit}>
-          <input
-            type="file"
-            placeholder="photo"
-            onChange={(event) => {
-              setPicture(event.target.files[0]);
-            }}
-          />
+          <div className="file-select">
+            {picture ? (
+              <div className="dashed-preview-image">
+                <img src={picture} alt="pré-visualisation" />
+                <div
+                  className="remove-img-button"
+                  onClick={() => {
+                    setPicture("");
+                  }}
+                >
+                  X
+                </div>
+              </div>
+            ) : (
+              <div className="dashed-preview-without">
+                <div className="input-design-default">
+                  <label htmlFor="file" className="label-file">
+                    <span className="input-sign">+</span>
+                    <span>Ajouter une photo</span>
+                  </label>
+                  <input
+                    id="file"
+                    type="file"
+                    className="input-file"
+                    onChange={(event) => {
+                      setFile(event.target.files[0]);
+                      setPicture(URL.createObjectURL(event.target.files[0]));
+                    }}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
           <div className="text-input-section">
             <div className="text-input">
               <h4>Titre</h4>
