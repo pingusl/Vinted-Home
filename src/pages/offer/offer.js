@@ -5,7 +5,7 @@ import { RotatingLines } from "react-loader-spinner";
 
 import "../../assets/styles/offers.css";
 
-const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = process.env.REACT_APP_LOCAL_BASE_URL;
 //const urlServer = "http://localhost:4000";
 //const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
 

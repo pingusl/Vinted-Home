@@ -7,6 +7,7 @@ import "../../assets/styles/home.css";
 
 function Home({ data, isLoading }) {
   const navigate = useNavigate();
+  console.log("Home L10 data:", data);
 
   return isLoading === true ? (
     <RotatingLines
@@ -35,8 +36,8 @@ function Home({ data, isLoading }) {
         </div>
       </div>
       <div className="home-card-wrapper">
-        {data.offers &&
-          data.offers.map((card, index) => {
+        {data &&
+          data.map((card, index) => {
             return <Card key={index} data={card} />;
           })}
       </div>

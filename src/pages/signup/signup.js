@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import Cookies from "cookies-js";
 
-const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = process.env.REACT_APP_LOCAL_BASE_URL;
 //const urlServer = "http://localhost:4000";
 //const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
 

@@ -4,9 +4,10 @@ import { Navigate } from "react-router-dom";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const urlServer = process.env.REACT_APP_BASE_URL;
+const urlServer = process.env.REACT_APP_LOCAL_BASE_URL;
 
 const Publish = (token) => {
+  console.log("publish L10 token:", token);
   //----States offer----//
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -23,6 +24,7 @@ const Publish = (token) => {
   const [file, setFile] = useState({});
   //---OnClick function----//
   const handleSubmit = async (event) => {
+    console.log("publish L27 file:", file);
     event.preventDefault();
     setIsPictureSending(true);
     const formData = new FormData();
@@ -41,17 +43,20 @@ const Publish = (token) => {
       const response = await axios.post(
         `${urlServer}/offer/publish`,
         formData,
-        { headers: { authorization: "Bearer " + token } }
+        {
+          headers: { authorization: "Bearer " + token.token },
+          "Content-Type": "multipart/form-data",
+        }
       );
       setData(response.data);
       setIsPictureSending(false);
-      //  console.log(response);
+      console.log("Publish L48 response:", response);
     } catch (error) {
       console.log(error.response);
     }
   };
 
-  return !token ? (
+  return !token.token ? (
     <Navigate to="/signin" />
   ) : (
     <div>

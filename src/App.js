@@ -26,8 +26,8 @@ import "./App.css";
 
 //----Clef public stripe----//
 const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_STRIPE_KEY);
-const urlServer = process.env.REACT_APP_BASE_URL;
-console.log(`urlServer: ${process.env.REACT_APP_BASE_URL}`);
+const urlServer = process.env.REACT_APP_LOCAL_BASE_URL;
+console.log(`urlServer: ${process.env.REACT_APP_LOCAL_BASE_URL}`);
 
 function App() {
   //---- Authorization States----//
@@ -58,9 +58,19 @@ function App() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${urlServer}/offers?priceMin=${fetchRangeValues[0]}&priceMax=${fetchRangeValues[1]}&title=${searchInput}`
+          `${urlServer}/offers?priceMin=${fetchRangeValues[0]}&priceMax=${
+            fetchRangeValues[1]
+          }&title=${searchInput}&sort=${
+            sortPrice ? "price-desc" : "price-asc"
+          }`,
+          {
+            headers: {
+              authorization: "Bearer " + token,
+            },
+          }
         );
-        console.table(response.data);
+        console.log(response.data);
+        console.log(response.data[0].product_details);
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
@@ -68,7 +78,7 @@ function App() {
       }
     };
     fetchData();
-  }, [searchInput, fetchRangeValues]);
+  }, [searchInput, fetchRangeValues, sortPrice, token]);
   return (
     <Router>
       <Header

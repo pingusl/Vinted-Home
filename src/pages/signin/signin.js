@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { RotatingLines } from "react-loader-spinner";
 
-const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
+const urlServer = process.env.REACT_APP_LOCAL_BASE_URL;
+//const urlServer = "https://lereacteur-vinted-api.herokuapp.com";
 //const urlServer = "http://localhost:4000";
 //const urlServer = "https://vinted-api-sebastien-lefebvre.herokuapp.com";
 
